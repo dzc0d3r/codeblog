@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% from "macros/home.html" import render_tags %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+
+<div class="container mt-5">
+    <h4 class="text-center text-muted mb-4"> All Posts related to {{ this.tag }} </h4>
+
+    <div class="container">
+        <ol>
+            {% for i in this.items %}
+            <li>
+                <h5><a class="btn btn-block btn-light text-left "
+                        href="
+                        {{
+                        i|url
+                        }}">
+                        {{ i._path }}
+                    </a></h5>
+            </li>
+            {% else %}
+            <li><em>No items.</em></li>
+            {% endfor %}
+        </ol>
+    </div>
+
+</div>
+{% endblock %}

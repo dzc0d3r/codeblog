@@ -1,0 +1,248 @@
+{% extends "layout.html" %}
+{% from "macros/home.html" import render_home %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+
+<section class="ayat d-none d-md-block ">
+    <div class="container-fluis ">
+        <div class="row ">
+            <div class="col-12 mt-5">
+
+                <div data-aos="flip-left"
+                    data-aos-delay="800"
+                    data-aos-easing="ease-in-out"
+                    data-aos-duration="1300"
+                    class="card quote mx-auto ">
+                    <div class="paper-clip">
+                    </div>
+                    <div class="text-center">
+                        <span>Verses from Quran i felt to share</span>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>So verily with the hardship, there is a relief, verily with the hardship, there is a
+                                relief.</p>
+                            <footer class="blockquote-footer">Quran <cite title="Source Title"> 94:5-6</cite>
+                            </footer>
+                        </blockquote>
+                        <blockquote class="blockquote mb-0 mt-2">
+                            <p> And say, "My Lord, increase me in knowledge"</p>
+                            <footer class="blockquote-footer">Quran <cite title="Source Title"> 20:114</cite>
+                            </footer>
+                        </blockquote>
+                        <blockquote class="blockquote mb-0 mt-2">
+                            <p> And the sun runs [on course] toward its stopping point. that is the determination of the
+                                exalted
+                                in might, the knowing</p>
+                            <footer class="blockquote-footer">Quran <cite title="Source Title"> 20:114</cite>
+                            </footer>
+                        </blockquote>
+                        <blockquote class="blockquote mb-0 mt-2">
+                            <p> And the heaven We constructed with strength, and indeed, We are [its] expander.</p>
+                            <footer class="blockquote-footer">Quran <cite title="Source Title"> 51:47</cite>
+                            </footer>
+                        </blockquote>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="pinned-posts mt-5">
+
+    <div class="container mt-5">
+        <h4 class="text-center mb-5 mt-4"
+            data-aos="zoom-in">Pinned blog posts filtered by tag</h4>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4">
+            <div class="col mb-4 card-tags">
+
+                <div class="card"
+                    data-aos-delay="50"
+                    data-aos="zoom-in-up">
+
+                    <div class="paper-clip">
+                    </div>
+                    <img class="card-img-top mx-auto mt-2 tags-images"
+                        src="{{ '/images/tags/python.png' | asseturl }} "
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Python</h5>
+                        <p class="card-text"> <code class="language-python">>>> print("Read all Python
+                                posts")</code>
+                        </p>
+                        <a href="{{ ('/posts/python/') | url }}"
+                            class="btn btn-block btn-light">Read Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-4 card-tags">
+
+                <div class="card"
+                    data-aos-delay="150"
+                    data-aos="zoom-in-up">
+                    <div class="paper-clip">
+                    </div>
+                    <img class="card-img-top mx-auto mt-2 tags-images"
+                        src="{{ '/images/tags/js.png' | asseturl }} "
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">JavaScript</h5>
+                        <p class="card-text"><code class="language-javascript">console.info(`Read all JS ${posts}`)
+                            </code></p>
+                        <a href="{{ ('/posts/javascript/') | url }}"
+                            class="btn btn-block btn-light">Read Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4 card-tags">
+
+                <div class="card"
+                    data-aos-delay="250"
+                    data-aos="zoom-in-up">
+                    <div class="paper-clip">
+                    </div>
+                    <img class="card-img-top mx-auto mt-2 tags-images"
+                        src="{{ '/images/tags/vue.svg' | asseturl }} "
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">VueJS</h5>
+                        <p class="card-text"><code class="language-bash">
+                                $ vue create awesome-front-end
+                            </code></p>
+                        <a href="{{ ('/posts/php/') | url }}"
+                            class="btn btn-block btn-light">Read Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4 card-tags">
+
+                <div class="card"
+                    data-aos-delay="350"
+                    data-aos="zoom-in-up">
+                    <div class="paper-clip">
+                    </div>
+                    <img class="card-img-top mx-auto mt-2 tags-images"
+                        src="{{ '/images/tags/php.svg' | asseturl }} "
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">PHP</h5>
+                        <p class="card-text"><code class="language-php">
+                                echo "Read all php posts";
+                            </code></p>
+                        <a href="{{ ('/posts/php/') | url }}"
+                            class="btn btn-block btn-light">Read Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4 card-tags">
+
+                <div class="card"
+                    data-aos-delay="450"
+                    data-aos="zoom-in-up">
+                    <div class="paper-clip">
+                    </div>
+                    <img class="card-img-top mx-auto mt-2 tags-images"
+                        src="{{ '/images/tags/devops.svg' | asseturl }} "
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">DevOps</h5>
+                        <p class="card-text"><code class="language-bash"> $ sudo docker-compose up
+                            </code></p>
+                        <a href="{{ ('/posts/devops/') | url }}"
+                            class="btn btn-block btn-light">Read Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4 card-tags">
+
+                <div class="card"
+                    data-aos-delay="550"
+                    data-aos="zoom-in-up">
+                    <div class="paper-clip">
+                    </div>
+                    <img class="card-img-top mx-auto mt-2 tags-images"
+                        src="{{ '/images/tags/linux.png' | asseturl }} "
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Gnu/Linux</h5>
+                        <p class="card-text"><code class="language-bash">
+
+                                $ sudo apt install awesomeness
+                            </code></p>
+                        <a href="{{ ('/posts/pentesting/') | url }}"
+                            class="btn btn-block btn-light">Read Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4 card-tags">
+
+                <div class="card"
+                    data-aos-delay="650"
+                    data-aos="zoom-in-up">
+                    <div class="paper-clip">
+                    </div>
+                    <img class="card-img-top mx-auto mt-2 tags-images"
+                        src="{{ '/images/tags/kali.png' | asseturl }} "
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">PenTesting</h5>
+                        <p class="card-text"><code class="language-bash">
+
+                                $ sudo apt install super-power
+                            </code></p>
+                        <a href="{{ ('/posts/pentesting/') | url }}"
+                            class="btn btn-block btn-light">Read Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-4 card-tags">
+
+                <div class="card"
+                    data-aos-delay="750"
+                    data-aos="zoom-in-up">
+                    <div class="paper-clip">
+                    </div>
+                    <img class="card-img-top mx-auto mt-2 tags-images"
+                        src="{{ '/images/tags/lektor.png' | asseturl }} "
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Lektor</h5>
+                        <p class="card-text"><code class="language-bash"> $~ lektor server
+                                Started build
+                            </code></p>
+                        <a href="{{ ('/posts/lektor/') | url }}"
+                            class="btn btn-block btn-light">Read Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</section>
+<section class="pinned-projects mt-5">
+
+    <!-- /.container -->
+    <div class="container mt-5">
+        <h4 class="text-center mb-5 mt-4"
+            data-aos="zoom-in">Pinned Projects</h4>
+
+    </div>
+
+
+
+
+</section>
+
+
+{% endblock %}

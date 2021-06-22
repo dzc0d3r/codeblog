@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% from "macros/blog-post.html" import render_blog_post %}
+{% from "macros/pagination.html" import render_pagination %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+<div class="container mt-5"
+  data-aos="fade-right"
+  data-aos-delay="850">
+  {% for child in this.pagination.items %}
+  <div>
+
+    {{ render_blog_post(child, from_index=true) }}
+
+  </div>
+  {% endfor %}
+  {{ render_pagination(this.pagination) }}
+
+</div>
+
+{% endblock %}

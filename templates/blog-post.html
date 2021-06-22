@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% from "macros/blog.html" import render_blog_post %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+<div class="container mt-5">
+
+
+  {% if this.tags %}
+  <div class="tags ml-2 pl-1">
+    {% for t in this.tags -%}
+
+    <a class="p-0 m-1"
+      href="{{ ('/posts@tag/' ~ t.lower())|url }}">
+      <span class="
+          badge ">
+        {{t}}
+      </span>
+    </a>
+
+
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="container mt-1">{{ render_blog_post(this) }}
+  </div>
+
+
+  <div class="
+      container
+      mt-3
+      mb-5">
+    <div class="comments">{{ render_disqus_comments() }}</div>
+  </div>
+
+
+
+
+
+  {% endblock %}
