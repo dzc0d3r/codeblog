@@ -130,14 +130,14 @@ img {
     content: '';
     position: absolute;
     height: 100px;
-    bottom: -70px;
+    bottom: -80px;
     right: 0;
     left: 0;
     background-color: var(--grey);
-    transform: skewY(-2.9deg);
-    -webkit-transform: skewY(-2.9deg);
-    -moz-transform: skewY(-2.9deg);
-    -ms-transform: skewY(-2.9deg);
+    transform: skewY(-2.4deg);
+    -webkit-transform: skewY(-2.4deg);
+    -moz-transform: skewY(-2.4deg);
+    -ms-transform: skewY(-2.4deg);
 }
 
 /* ayat card */
