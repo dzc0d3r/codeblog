@@ -146,7 +146,7 @@ img {
 }
 .ayat .card {
   margin-top: 4rem;
-  background: url("../../images/old-paper.webp") repeat scroll 0% 0% transparent;
+  background: url("../../images/minified/old-paper.webp") repeat scroll 0% 0% transparent;
   border-radius: 0rem;
 }
 .blockquote p {
@@ -170,7 +170,7 @@ img {
 .paper-clip {
   width: 60px;
   height: 85px;
-  background: url("../../images/paper-clip.png") repeat scroll 0% 0% transparent;
+  background: url("../../images/minified/paper-clip.png") repeat scroll 0% 0% transparent;
   position: absolute;
   top: -14px;
   right: -13px;

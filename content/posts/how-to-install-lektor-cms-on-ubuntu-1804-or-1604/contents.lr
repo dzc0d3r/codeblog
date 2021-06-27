@@ -155,7 +155,7 @@ Now, open your browser and go to the server hostname or IP address followed by p
 
 You should see Lektor welcome page similar to the one below
 
-![lektorcms ](/images/lektorcms_ubuntu_install.png)
+![lektorcms ](/images/minified/lektorcms_ubuntu_install.png)
 
 To go to the admin backend portal, type
 
@@ -163,7 +163,7 @@ http://localhost:5000/admin
 
 That should prompt you for the superuser account and password… and allow you to logon to the backend…
 
-![lektorcms ](/images/lektorcms_ubuntu_install_1.png)
+![lektorcms ](/images/minified/lektorcms_ubuntu_install_1.png)
 
 That’s it!
 
