@@ -159,11 +159,7 @@ a:hover {
 /* end Navbar links*/
 
 
-/* a workaround to make all photos responsive */
-img {
-  max-width: 100%;
-  height: auto;
-}
+
 
 /* Showcase */
 
@@ -269,6 +265,8 @@ img {
 /* code syntax*/
 pre {
   border-left : var(--custom-blue) solid 0.3rem;
+  margin: 1.5rem 0 !important;
+  background: var(--custom-grey) !important;
 }
 .copy-to-clipboard-button {
   background: var(--custom-blue) !important;
@@ -376,3 +374,20 @@ h3 {
   font-size: calc(1em + (12 - 10) * ((100vw - 360px) / (1600 - 360))) !important
 }
 
+
+
+
+/* Posts styles */
+.meta a {
+  margin-right: .25rem;
+}
+.blog-post ul {
+  margin-left: 4rem;
+  font-size: 1.1rem;
+}
+
+/* a workaround to make all photos responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}

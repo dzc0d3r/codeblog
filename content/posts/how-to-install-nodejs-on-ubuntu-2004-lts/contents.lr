@@ -1,0 +1,205 @@
+title: How To Install Node.js on Ubuntu 20.04 LTS
+---
+author: Walid Lamraoui
+---
+body:
+
+
+
+#####Introduction 
+[**Node.js**](https://nodejs.org/en/)  is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser. 
+It lets developers use JavaScript to write command line tools and for server-side scripting to produce dynamic web page content before the page is sent to the user's web browser. 
+Consequently, Node.js represents a "JavaScript everywhere" paradigm, unifying web-application development around a single programming language, rather than different languages for server-side and client-side scripts. 
+
+In this post, we will use three different ways to get Node.js installed on an Ubuntu 20.04 machine :   
+- installing `nvm`, the Node Version Manager, and using it to install and manage multiple versions of `node.js`.
+- using the NodeSource PPA to install `nodejs` .
+- using snap to install nodejs on ubuntu 20.04 .
+- using `apt` to install the `nodejs`  from Ubuntu’s default software repository.
+
+
+##### 1 - Installing Node Using the Node Version Manager [RECOMMENDED]
+The best way ( in my opinion) of installing `node.js` is to use `nvm` : the Node Version Manager.
+
+As it's particularly flexible, this tool allows you to install and maintain many different independent versions of Node.js, and their associated Node packages, at the same time.
+
+To install NVM on your Ubuntu 20.04 machine, visit [the project’s GitHub repo](https://github.com/nvm-sh/nvm). 
+
+Copy the command from the README file. This will get you the most recent version of the installation script.
+(version 0.38.0 the time of writting this article )
+
+make sure you have curl installed :
+<pre><code class="language-bash" > 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+</code></pre>
+
+or if you preffer wget : 
+<pre><code class="language-bash"> 
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+</code></pre>
+
+Running either of the above commands downloads a script and runs it. The script clones the nvm repository to `~/.nvm`, and attempts to add the source lines from the snippet below to the correct profile file (`~/.bash_profile`, `~/.zshrc`, `~/.profile`, or `~/.bashrc`).
+<pre><code class="language-bash">
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+</code></pre>
+
+Now, you can ask NVM which versions of Node are available:
+<pre><code class="language-bash">
+nvm list-remote
+</code></pre>
+the output should be something like : 
+<pre><code class="language-bash">
+...
+       v14.14.0
+       v14.15.0   (LTS: Fermium)
+       v14.15.1   (LTS: Fermium)
+       v14.15.2   (LTS: Fermium)
+       v14.15.3   (LTS: Fermium)
+       v14.15.4   (LTS: Fermium)
+       v14.15.5   (LTS: Fermium)
+       v14.16.0   (LTS: Fermium)
+       v14.16.1   (LTS: Fermium)
+       v14.17.0   (LTS: Fermium)
+       v14.17.1   (LTS: Fermium)
+       v14.17.2   (Latest LTS: Fermium)
+        v15.0.0
+        v15.0.1
+        ...
+        v16.3.0
+        v16.4.0
+        v16.4.1
+</code></pre>
+
+It’s a very long list! You can install a version of Node by typing any of the release versions you see. For instance, to get version v16.3.0, you can type:
+
+<pre><code class="language-bash">
+nvm install v16.3.0
+</code></pre>
+
+You can see the different versions you have installed by typing:
+
+<pre><code class="language-bash">
+nvm list
+</code></pre>
+
+This shows the currently active version on the first line (->   v16.3.0), followed by some named aliases and the versions that those aliases point to.
+
+
+**Note:** if you also have a version of Node.js installed through aptyou may see a system entry here. You can always activate the system-installed version of Node using `nvm use system` .
+
+Additionally, you’ll see aliases for the various long-term support (or LTS) releases of Node:
+
+We can install a release based on these aliases as well. For instance, to install the latest long-term support version, `fermium`, run the following:
+<pre><code class="language-bash">
+nvm install lts/fermium
+</code></pre>
+
+You can switch between installed versions with nvm use:
+
+<pre><code class="language-bash">
+nvm use lts/fermium
+</code></pre>
+output :
+<pre><code class="language-bash">
+Now using node v14.17.2 (npm v6.14.13)
+</code></pre>
+
+You can verify that the install was successful using the same technique from the other sections, by typing:
+<pre><code class="language-bash">
+node --version
+</code></pre>
+
+#####2 - Installing Node.js with Apt Using a NodeSource PPA
+To install Node.js, you can also use a PPA (personal package archive) maintained by NodeSource. These PPAs have more versions of Node.js available than the official Ubuntu repositories. v10, v12, v13, v14, and v16 are available as of the time of writing.
+
+You can visit the [Github repo](https://github.com/nodesource/distributions) for more information.
+
+First, you need to add the PPA in order to get access to its packages. From your home directory, use curl to retrieve the installation script for your preferred version, making sure to replace 14.x with your preferred version string (if different). and then install nodejs
+
+<pre><code class="language-bash">
+curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+</code></pre>
+
+Verify that you’ve installed the new version by running:
+
+
+<pre><code class="language-bash">
+node --version
+</code></pre>
+
+<pre><code class="language-bash">
+Output
+v14.17.2
+</code></pre>
+
+The NodeSource nodejs package contains both the `node` binary and `npm`, so you don’t need to install `npm` separately.
+
+#####3 Using snaps to install nodejs [GOOD IF YOU LIKE SNAP]
+
+
+[Snaps](https://docs.snapcraft.io/snaps/) are containerized software packages designed to work across cloud, desktop, and IoT devices. They work natively on most popular Linux distributions, feature automatic updates for users, improved security, and greater flexibility for developers working in Linux environments. Their auto-updating and transactional nature is making snaps a popular choice for the delivery of desktop applications in particular.
+
+The Node.js snap contains the Node.js runtime, along the two most widely-used package managers, `npm` and `yarn`. So with a single command, developers can be up and running with their chosen version(s) of Node.js and supporting tools with no need for external repos or personal package archives (PPAs).
+
+Simply run :
+<pre><code class="language-bash">
+sudo snap install node --classic
+</code></pre>
+
+This will install the current LTS Alongside with npm and yarn.
+
+For more information on how to install different versions visit [node snap package homepage](https://snapcraft.io/node)
+
+
+
+
+
+
+
+
+#####4 - Installing Node.js with apt from the Default Repositories [ NOT RECOMMENDED]
+Ubuntu 20.04 contains a version of Node.js in its default repositories that can be used to provide a consistent experience across multiple systems. but keep in mind it is not  the latest LTS version, but it should be stable and sufficient for quick experimentation with the language.
+
+To install nodejs , you can use the apt package manager. refresh your local package index first by typing: 
+<pre><code class="language-bash">
+sudo apt update 
+</code></pre>
+
+Then simply run :
+<pre><code class="language-bash">
+sudo apt install nodejs 
+</code></pre>
+
+Check that the install was successful by querying node for its version number:
+<pre><code class="language-bash">
+node --version
+</code></pre>
+ 
+you’ll also want to also install `npm`, the Node.js package manager.
+
+You can do this by installing the npm package with apt:
+
+<pre><code class="language-bash">
+sudo apt install npm
+</code></pre>
+
+This will allow you to install modules and packages to use with Node.js.
+
+And that's it, thanks for reading.
+
+
+
+
+---
+pub_date: 2021-07-02
+---
+tags:
+
+javascript
+nodejs
+linux
+ubuntu
+---
+twitter_handle: dzc0d3r

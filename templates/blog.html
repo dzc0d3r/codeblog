@@ -3,17 +3,21 @@
 {% from "macros/pagination.html" import render_pagination %}
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
-<div class="container mt-5"
-  data-aos="fade-right"
-  data-aos-delay="850">
+<div class="container mt-5">
   {% for child in this.pagination.items %}
-  <div>
+  <div data-aos="fade-right"
+    data-aos-delay="850">
 
     {{ render_blog_post(child, from_index=true) }}
 
   </div>
   {% endfor %}
-  {{ render_pagination(this.pagination) }}
+  <div data-aos="fade-right"
+    data-aos-delay="1200">
+    {{ render_pagination(this.pagination) }}
+
+  </div>
+
 
 </div>
 
