@@ -20,8 +20,40 @@
 }
 /*end reset */
 
+/* bootstrap tweaks*/
+
+.btn-primary {
+  background-color: var(--custom-blue);
+  border: none;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+  background-color: #018b97 !important;
+}
+
 
 /* animations */
+@keyframes up {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.2rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+} 
+@keyframes autoscroll {
+    0% {
+      background-position: 50% 0;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 50% 0%;
+    }
+}
 
 @keyframes rollIn {
   from {
@@ -222,7 +254,6 @@ a:hover {
 
 
 /* Cards */
-
 .paper-clip {
   width: 60px;
   height: 85px;
@@ -232,7 +263,7 @@ a:hover {
   right: -13px;
   z-index: 1000;
 }
-.card-tags .card {
+.card-tags {
   background-color: #f7f7f7;
   border-radius: .45rem;
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
@@ -240,13 +271,13 @@ a:hover {
   
  
 }
-.card-tags .card:hover {
+.card-tags:hover {
   transform: scale(1.06);
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
-.card-tags .card:hover a {
+.card-tags:hover a {
   animation: shakeX 1s ease-in-out;
   animation-delay: .4s;
   
@@ -257,6 +288,143 @@ a:hover {
   height: 6rem;
   /* TODO : use width and height in img tag instead*/
 }
+
+/* Projects Cards */
+.projects .card {
+ overflow: hidden;
+}
+.projects .card .card-header{
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+
+
+}
+.projects .card .card-header:hover {
+  cursor: pointer;
+  animation-duration: 1.5s;
+  animation-name: autoscroll;
+  animation-timing-function: ease-out;
+}
+
+.projects .card .card-bottom {
+  background-color: var(--custom-blue);
+  border-radius: 0 0px 0.5rem 0.5rem;
+  color: white;
+  width: 100%;
+}
+.projects .card .card-bottom .read-more {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.projects .card .card-bottom .read-more p {
+  margin: 0;
+}
+.projects .card .card-bottom .read-more i {
+  font-size: 1.3rem;
+  animation: up 1s infinite;
+}
+.projects .card .card-bottom .card-body {
+  position: absolute;
+  bottom: 0;
+  height: 300px;
+  width: 100%;
+  transition: all 1s;
+  top: 100%;
+  border-radius: 0.5rem;
+  margin-top: 80px;
+  display: flex;
+  background-color: var(--custom-blue);
+}
+.projects .card-bottom .card-body .card-body-box {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background-color: white;
+  color: #000;
+  border-radius: 0.5rem;
+}
+.projects .card .card-bottom .card-body .card-body-box .card-body-title {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--custom-blue);
+}
+
+.projects .card .card-bottom .card-body .card-body-box .card-body-desc {
+  font-size: 1rem;
+  color: #495057;
+}
+.projects .card .card-bottom .card-body .card-body-box .card-body-desc a {
+  color: #495057;
+  text-decoration: underline;
+}
+.projects .card .card-bottom .card-body .card-body-box .card-body-keys {
+  font-size: .7rem;
+  color: #868e96;
+}
+.projects .card .card-bottom .card-body .card-body-box .card-body-keys i {
+  margin-right: 0.3rem;
+  color: var(--custom-blue);
+}
+.projects .card .card-bottom .card-body .card-body-box .card-body-action {
+  display: flex;
+  justify-content: center;
+}
+.projects .card .card-bottom .card-body .card-body-box .card-body-action .btn {
+  padding: 0.4rem 0.7rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+.projects .card .card-bottom .card-body .card-body-box .card-body-action .btn:last-child {
+  margin-right: none;
+}
+.projects .card .card-bottom .card-body .card-body-box .card-body-action .btn i {
+  font-size: 1.1rem;
+  margin-right: 0.3rem;
+}
+.projects .card .card-bottom:hover .card-body {
+  margin-top: 0;
+  top: 20%;
+}
+
+.projects #project1 {
+  background-image: url("../../images/projects/blog.png");
+}
+
+
+/*
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+ .card    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .7s ease-in-out;
+    background: rgba(0, 117, 128, 0.7);
+  }
+
+.card-overlay a {
+  position : relative;
+  top: 1rem;
+  right: 1rem;
+  margin-right: .4rem;
+  
+  float: right;
+  border-radius: 0;
+}
+.card:hover .card-overlay {
+    opacity: 1;
+}
+*/
 
 /* End Cards */
 
