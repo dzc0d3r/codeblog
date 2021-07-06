@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta content="Walid Lamraoui (dzc0d3r) personal codeblog .. This blog is about : programming, web developement, Frontend, Backend, DevOps, Penetration testing, Gnu/Linux and more" name="description"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="../../../../images/minified/logo.ico?h=aada122e" rel="shortcut icon" type="image/x-icon"/><link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" referrerpolicy="no-referrer" rel="stylesheet"/><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/><link href="../../../../static/css/prism.min.css?h=95707fd2" rel="stylesheet"/><link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/><link href="../../../../static/css/style.min.css?h=c7c0848e" rel="stylesheet"/><title>How to Host a Site on the Dark Web</title></head><body data-prismjs-copy-timeout="800"><nav class="navbar navbar-expand-lg navbar-dark bg-primary py-4"><div class="container"><a class="navbar-brand" data-aos="fade-right" data-aos-delay="50" data-aos-duration="900" data-aos-easing="ease-in-out" data-aos-offset="50" data-aos-once="false" href="../../../../"><span>&lt;</span> DzC0d3R <span>/&gt;</span></a><button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><div class="navbar-collapse collapse" id="navbarColor02"><ul class="navbar-nav ml-auto" data-aos="fade-left" data-aos-delay="50" data-aos-duration="900" data-aos-easing="ease-in-out" data-aos-offset="50" data-aos-once="false"><li><a class="linky nav-link" href="../../../../">Home</a></li><li class="active"><a class="linky nav-link" href="../../../">Posts</a></li><li><a class="linky nav-link" href="../../../../projects/">Projects</a></li><li><a class="linky nav-link" href="../../../../about/">About</a></li></ul></div></div></nav><main class="page"><div class="container mt-5"><div class="tags ml-2 pl-1"><a class="p-0 m-1" href="../../../dark-web/"><span class="badge">dark-web</span></a> <a class="p-0 m-1" href="../../../onion/"><span class="badge">onion</span></a> <a class="p-0 m-1" href="../../../tor/"><span class="badge">tor</span></a> <a class="p-0 m-1" href="../../../pentesting/"><span class="badge">pentesting</span></a> <a class="p-0 m-1" href="../../../ubuntu/"><span class="badge">ubuntu</span></a> <a class="p-0 m-1" href="../../../ubuntu-how-to/"><span class="badge">ubuntu-how-to</span></a></div><div class="container mt-1"><div class="blog-post"><h4>How to Host a Site on the Dark Web</h4><h5>Introduction</h5><p>In this article we will be setting up a server that will host a website on the <a href="https://en.wikipedia.org/wiki/Dark_web">Dark Web</a>. We will be using Tor Hidden services for this purpose. and a static website for simplicity and security.</p><p>Also all the following was tested on a remote server running Ubuntu 18.04 LTS. The server is properly secured and hardened for production use. Also i will be assuming that you have a basic familiarity with the Dark Web and you already have the <a href="https://www.torproject.org/download/">Tor Browser</a> installed, <a href="https://tails.boum.org/install/">Tails</a>, or even a <a href="https://support.brave.com/hc/en-us/articles/360018121491-What-is-a-Private-Window-with-Tor-Connectivity-">Brave browser Private window with Tor.</a></p><h5>Installing Tor</h5><p>You can search for the tor package in the default repositories of Ubuntu, by running :</p><pre><code class="language-bash">
+sudo apt update
+sudo apt show tor 
+</code></pre><p>Output :</p><pre><code class="language-bash">
+Package: tor
+Version: 0.3.2.10-1
+Priority: optional
+Section: universe/net
+Origin: Ubuntu
+... 
+</code></pre><p>As you can see the tor package is not reliably updated. Luckily for us the Tor project maintains their own repository. so we will add that repository.</p><p>To add the Tor project repository, open your source list at <code>/etc/apt/sources.list</code> :</p><pre><code class="language-bash">
+sudo nano /etc/apt/sources.list
+</code></pre><p>Add the following :</p><pre><code class="language-bash">
+deb https://deb.torproject.org/torproject.org bionic main
+deb-src https://deb.torproject.org/torproject.org bionic main
+</code></pre><p>Then add the gpg key used to sign the packages by running the following commands at your command prompt:</p><pre><code class="language-bash">
+curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+</code></pre><p>They also provide a Debian package to help you keep our signing key current. It is recommended you use it. Install it alongside with Tor it by running the following commands:</p><pre><code class="language-bash">
+sudo apt update
+sudo apt install tor deb.torproject.org-keyring
+</code></pre><h5>The Tor Hidden Service</h5><p>Now we need to edit the Tor configuration file to enable the hidden service. But first we will make a backup of this configuration file.</p><pre><code class="language-bash">
+sudo cp /etc/tor/torrc /etc/tor/torrc.bak
+</code></pre><p>Next we need to edit the configuration file.</p><pre><code class="language-bash">
+sudo nano /etc/tor/torrc
+</code></pre><p>By default all Tor client services, relays, and hidden services are commented out and disabled. Let’s activate the hidden service. Find the section for hidden services. It will look something like this.</p><pre><code class="language-bash">
+############### This section is just for location-hidden services ####### 
+## Once you have configured a hidden service, you can look at the
+## contents of the file ".../hidden_service/hostname" for the address
+## to tell people.
+## 
+## HiddenServicePort x y:z says to redirect requests on port x to the
+## address y:z.#HiddenServiceDir /var/lib/tor/hidden_service/
+#HiddenServicePort 80 127.0.0.1:80#HiddenServiceDir /var/lib/tor/other_hidden_service/
+#HiddenServicePort 80 127.0.0.1:80
+#HiddenServicePort 22 127.0.0.1:22
+</code></pre><p>Uncomment the following lines by removing the <code>#</code> at the beginning :</p><pre><code class="language-bash">
+#HiddenServiceDir /var/lib/tor/hidden_service/
+#HiddenServicePort 80 127.0.0.1:80
+</code></pre><p>The Hidden services section should look something like :</p><pre><code class="language-bash">
+############### This section is just for location-hidden services #########
+## Once you have configured a hidden service, you can look at the
+## contents of the file ".../hidden_service/hostname" for the address
+## to tell people.
+##
+## HiddenServicePort x y:z says to redirect requests on port x to the
+## address y:z.
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:80
+#HiddenServiceDir /var/lib/tor/other_hidden_service/
+#HiddenServicePort 80 127.0.0.1:80
+#HiddenServicePort 22 127.0.0.1:2
+</code></pre><p>Now restart the Tor service :</p><pre><code class="language-bash">
+sudo systemctl restart tor
+</code></pre><p>Few files should be generated in <code>/var/lib/tor/hidden_service/</code> directory, a <code>hostname</code> file, and a <code>private_key</code></p><p>Open it up to get your <code>.onion</code> address. :</p><pre><code class="language-bash">
+sudo nano /var/lib/tor/hidden_service/hostname
+</code></pre><p>My address was <code>uhs5lbrjzbbtcsmx.onion</code></p><p>The <code>private_key</code> file conatins your private key, you should make a backup of it and keep it secure.</p><p>It should look similar to this.</p><pre><code class="language-bash">
+-----BEGIN RSA PRIVATE KEY-----
+ENzZ/c1aKAwslQ/WwLjd9rRh4rfK74887uS+Thb3ggnVDc+GKHBlJcdwsawaslVR
+Y5Zvo95atYIHigGHR1QCbZ1GCBt4YebLcCBrNG1zsDoDEbxu4MqcdewsccewsSad
+VB+0dntEJ2CDciHz6lnSvz9VJoWA8m5PNlC4ITZ+v1prQIDAQABOLbdxswecewwA
+AoGBAKCCPCFmUE8HS492qzqqwy3wxfpvf4l5RHCgHK3in1efGZd1+kQLeHiu2ZF1
+Vv+0mtWF3eDUy7g0oDluck1337Haxor1FcoKGEgpCXtVnOuEnEJEn/K+dFsxFYBd
+AUuZ61yOC7cWySAJA1pi5CtJQm1aH10IxyNYg9kjOPbEiIjBAkEA3UtXwwTxHWLZ
+hvcBLzM3uQ31CK93HKar40DyYmlOHZfHPhzgwjr3gwbAjqKnx0AXcnBuhy1gwwW8
+U4V6yDSNyrqfiYcMPCYVEKZV/ebmBLW0BWOw+kimukGhGQ==
+-----END RSA PRIVATE KEY-----
+</code></pre><h5>Installing Nginx</h5><p><a href="https://nginx.org/en/">Nginx</a> provides a server backend that can be more suitably hardened and secured against the potential threats against a hidden service, although <a href="https://www.apache.org/">Apache</a> or other HTTP server software can certainly work. Just make sure that it's bound to 127.0.0.1 to prevent discoveries through services such as <a href="https://www.shodan.io/">Shodan</a>.</p><p>To install <code>nginx</code> simply run :</p><pre><code class="language-bash">
+sudo apt install nginx
+</code></pre><p>Your server must be running a firewall. By default Ubuntu has a firewall named <code>UFW</code> and we will be using it. The following command will allow HTTP traffic.</p><pre><code class="language-bash">
+sudo ufw allow 'Nginx HTTP'
+</code></pre><p>Visit your server’s IP address to verify that the web server is operational.<br/> If things are working correctly, remove this rule. Then reload the firewall.</p><pre><code class="language-bash">
+sudo ufw deny 'Nginx HTTP'
+sudo ufw reload
+</code></pre><h5>Nginx configuration</h5><p>Edit the main Nginx configuration file to disable undesirable information sharing :</p><pre><code class="language-bash">
+sudo nano /etc/nginx/nginx.conf
+</code></pre><p>Inside the <code>http</code> block add the following:</p><pre><code class="language-bash">
+server_name_in_redirect off;
+server_tokens off;
+port_in_redirect off;
+</code></pre>Then restart the Nginx server.<pre><code class="language-bash">
+sudo systemctl restart nginx
+</code></pre><h5>Web Server Root Directory</h5><p>Make a directory to hold our files for the web server.</p><pre><code class="language-bash">
+sudo mkdir /var/www/dark_web
+</code></pre><p>Make and edit an index.html file for your site for testing purposes.</p><pre><code class="language-bash">
+sudo nano /var/www/dark_web/index.html
+</code></pre><p>Inside just put anything. We don’t need actual html, just something for right now.</p><pre><code class="language-bash">
+Welcome to my dark web page
+</code></pre><p>Set the permissions so that Nginx can access the files.</p><pre><code class="language-bash">
+sudo chmod 755 /var/www/dark_web
+</code></pre><h5>Remove Nginx Default</h5><p>Remove the default site.</p><pre><code class="language-bash">
+sudo rm /etc/nginx/sites-enabled/default
+sudo rm /etc/nginx/sites-available/default
+</code></pre><h5>Add Available Site</h5><p>Make a new site in the <code>sites-available</code> directory.</p><pre><code class="language-bash">
+sudo nano /etc/nginx/sites-available/dark_web
+</code></pre><p>Inside add the following replacing the root and server_name values for your instance.</p><pre><code class="language-bash">
+server {
+    listen 127.0.0.1:80;
+    root /var/www/dark_web/;
+    index index.html;
+    server_name uhs5lbrjzbbtcsmx.onion;
+}
+</code></pre><p>Add this site the the <code>site_enabled</code>.</p><pre><code class="language-bash">
+sudo ln -s /etc/nginx/sites-available/dark_web /etc/nginx/sites-enabled/
+</code></pre><p>Then restart the Nginx server.</p><pre><code class="language-bash">
+sudo systemctl restart nginx
+</code></pre><h5>Conclusion</h5><p>Now you have a site on the Dark Web. Any files in the <code>/var/www/dark_web</code> will be available on the Tor network. the static site generator should output to this folder.</p><p class="meta">Written By: <a href="https://twitter.com/dzc0d3r">Walid Lamraoui</a>on 2021-07-05</p></div></div><div class="container mt-3 mb-5"><div class="comments"><div id="disqus_thread"></div><script>
+  var disqus_config = function() { this.page.identifier = "/posts/how-to-host-a-site-on-the-dark-web"; this.page.url = "https://dzc0d3r.github.io/codeblog/posts/2021/7/how-to-host-a-site-on-the-dark-web/"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//dzc0d3r.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div></div></div></main><div class="custom-shape-divider-bottom-1623373495"><svg data-name="Layer 1" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path class="shape-fill" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path></svg></div><div class="container-fluid custom-fluid pb-0 mb-0 justify-content-center text-light"><footer><div class="container"><div class="row my-5 justify-content-center py-5"><div class="col-12"><div class="row"><div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto"><h3 class="text-muted mb-md-0 mb-5 bold-text">DzC0d3R</h3></div><div class="col-xl-4 col-md-8 col-sm-8 col-12 my-auto"><p class="social text-muted mb-0 pb-0 bold-text"><a class="mx-2" href="https://github.com/dzc0d3r" target="_blank"><i aria-hidden="true" class="fa fa-github"></i></a> <a class="mx-2" href="https://stackoverflow.com/users/8990846/walid-lamraoui" target="_blank"><i aria-hidden="true" class="fa fa-stack-overflow"></i></a> <a class="mx-2" href="#" target="_blank"><i aria-hidden="true" class="fa fa-codepen"></i></a> <a class="mx-2" href="#" target="_blank"><i aria-hidden="true" class="fa fa-linkedin-square"></i></a> <a class="mx-2" href="#" target="_blank"><i aria-hidden="true" class="fa fa-medium"></i></a> <a class="mx-2" href="#" target="_blank"><i aria-hidden="true" class="fa fa-twitter"></i></a></p></div><div class="col-xl-8 col-md-4 col-sm-4 col-12 mt-4"><p class="rights">Copyright ©<script>document.write(new Date().getFullYear())</script>DzC0d3R All Rights Reserved</p></div></div></div></div></div></footer></div><script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script><script crossorigin="anonymous" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script><script src="../../../../static/js/prism.min.js?h=9b543dfb" type="text/javascript"></script><script src="https://unpkg.com/aos@next/dist/aos.js"></script><script src="../../../../static/js/app.min.js?h=ee69aafa" type="text/javascript"></script></body></html>
