@@ -1,0 +1,291 @@
+title: How to Host a Site on the Dark Web
+---
+author: Walid Lamraoui
+---
+tags:
+
+dark-web
+onion
+tor
+pentesting
+ubuntu 
+ubuntu-how-to
+---
+twitter_handle: dzc0d3r
+---
+pub_date: 2021-07-05
+---
+body:
+
+##### Introduction
+
+In this article we will be setting up a server that will host a website on the [Dark Web](https://en.wikipedia.org/wiki/Dark_web). We will be using Tor Hidden services for this purpose. and a static website for simplicity and security.
+
+Also all the following was tested on a remote server running Ubuntu 18.04 LTS. The server is properly secured and hardened for production use. Also i will be assuming that you have a basic familiarity with the Dark Web and you already have the [Tor Browser](https://www.torproject.org/download/) installed, [Tails](https://tails.boum.org/install/), or even a [Brave browser Private window with Tor.](https://support.brave.com/hc/en-us/articles/360018121491-What-is-a-Private-Window-with-Tor-Connectivity-)
+
+##### Installing Tor
+You can search for the tor package in the default repositories of Ubuntu, by running :
+
+<pre>
+<code class="language-bash">
+sudo apt update
+sudo apt show tor 
+</code></pre>
+
+Output :
+<pre>
+<code class="language-bash">
+Package: tor
+Version: 0.3.2.10-1
+Priority: optional
+Section: universe/net
+Origin: Ubuntu
+... 
+</code></pre>
+
+
+
+As you can see the tor package is not reliably updated. 
+Luckily for us the Tor project maintains their own repository. so we will add that repository.
+
+To add the Tor project repository, open your source list at `/etc/apt/sources.list` : 
+
+<pre><code class="language-bash">
+sudo nano /etc/apt/sources.list
+</code></pre>
+
+Add the following : 
+
+<pre><code class="language-bash">
+deb https://deb.torproject.org/torproject.org bionic main
+deb-src https://deb.torproject.org/torproject.org bionic main
+</code></pre>
+
+Then add the gpg key used to sign the packages by running the following commands at your command prompt:
+
+<pre><code class="language-bash">
+curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+</code></pre>
+
+They also provide a Debian package to help you keep our signing key current. It is recommended you use it. Install it alongside with Tor it by running the following commands:
+<pre><code class="language-bash">
+sudo apt update
+sudo apt install tor deb.torproject.org-keyring
+</code></pre>
+
+
+#####The Tor Hidden Service
+Now we need to edit the Tor configuration file to enable the hidden service. But first we will make a backup of this configuration file.
+
+<pre><code class="language-bash">
+sudo cp /etc/tor/torrc /etc/tor/torrc.bak
+</code></pre>
+
+Next we need to edit the configuration file.
+<pre><code class="language-bash">
+sudo nano /etc/tor/torrc
+</code></pre>
+
+By default all Tor client services, relays, and hidden services are commented out and disabled. Let’s activate the hidden service. Find the section for hidden services. It will look something like this.
+<pre><code class="language-bash">
+############### This section is just for location-hidden services ####### 
+## Once you have configured a hidden service, you can look at the
+## contents of the file ".../hidden_service/hostname" for the address
+## to tell people.
+## 
+## HiddenServicePort x y:z says to redirect requests on port x to the
+## address y:z.#HiddenServiceDir /var/lib/tor/hidden_service/
+#HiddenServicePort 80 127.0.0.1:80#HiddenServiceDir /var/lib/tor/other_hidden_service/
+#HiddenServicePort 80 127.0.0.1:80
+#HiddenServicePort 22 127.0.0.1:22
+</code></pre>
+
+Uncomment the following lines by removing the `#` at the beginning :
+
+<pre><code class="language-bash">
+#HiddenServiceDir /var/lib/tor/hidden_service/
+#HiddenServicePort 80 127.0.0.1:80
+</code></pre>
+
+The Hidden services section should look something like :
+
+<pre><code class="language-bash">
+############### This section is just for location-hidden services #########
+## Once you have configured a hidden service, you can look at the
+## contents of the file ".../hidden_service/hostname" for the address
+## to tell people.
+##
+## HiddenServicePort x y:z says to redirect requests on port x to the
+## address y:z.
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:80
+#HiddenServiceDir /var/lib/tor/other_hidden_service/
+#HiddenServicePort 80 127.0.0.1:80
+#HiddenServicePort 22 127.0.0.1:2
+</code></pre>
+
+Now restart the Tor service : 
+
+<pre><code class="language-bash">
+sudo systemctl restart tor
+</code></pre>
+
+Few files should be generated in `/var/lib/tor/hidden_service/` directory, a `hostname` file, and a `private_key`
+
+Open it up to get your `.onion` address. : 
+
+<pre><code class="language-bash">
+sudo nano /var/lib/tor/hidden_service/hostname
+</code></pre>
+
+My address was `uhs5lbrjzbbtcsmx.onion`
+
+
+The `private_key` file conatins your private key, you should make a backup of it and keep it secure.
+
+It should look similar to this.
+
+<pre><code class="language-bash">
+-----BEGIN RSA PRIVATE KEY-----
+ENzZ/c1aKAwslQ/WwLjd9rRh4rfK74887uS+Thb3ggnVDc+GKHBlJcdwsawaslVR
+Y5Zvo95atYIHigGHR1QCbZ1GCBt4YebLcCBrNG1zsDoDEbxu4MqcdewsccewsSad
+VB+0dntEJ2CDciHz6lnSvz9VJoWA8m5PNlC4ITZ+v1prQIDAQABOLbdxswecewwA
+AoGBAKCCPCFmUE8HS492qzqqwy3wxfpvf4l5RHCgHK3in1efGZd1+kQLeHiu2ZF1
+Vv+0mtWF3eDUy7g0oDluck1337Haxor1FcoKGEgpCXtVnOuEnEJEn/K+dFsxFYBd
+AUuZ61yOC7cWySAJA1pi5CtJQm1aH10IxyNYg9kjOPbEiIjBAkEA3UtXwwTxHWLZ
+hvcBLzM3uQ31CK93HKar40DyYmlOHZfHPhzgwjr3gwbAjqKnx0AXcnBuhy1gwwW8
+U4V6yDSNyrqfiYcMPCYVEKZV/ebmBLW0BWOw+kimukGhGQ==
+-----END RSA PRIVATE KEY-----
+</code></pre>
+
+#####Installing Nginx
+[Nginx](https://nginx.org/en/) provides a server backend that can be more suitably hardened and secured against the potential threats against a hidden service, although [Apache](https://www.apache.org/) or other HTTP server software can certainly work. Just make sure that it's bound to 127.0.0.1 to prevent discoveries through services such as [Shodan](https://www.shodan.io/).
+
+To install `nginx` simply run : 
+
+<pre><code class="language-bash">
+sudo apt install nginx
+</code></pre>
+
+Your server must be running a firewall. By default Ubuntu has a firewall named `UFW` and we will be using it.
+The following command will allow HTTP traffic.
+
+<pre><code class="language-bash">
+sudo ufw allow 'Nginx HTTP'
+</code></pre>
+
+Visit your server’s IP address to verify that the web server is operational.<br>
+If things are working correctly, remove this rule. Then reload the firewall.
+
+<pre><code class="language-bash">
+sudo ufw deny 'Nginx HTTP'
+sudo ufw reload
+</code></pre>
+
+#####Nginx configuration
+Edit the main Nginx configuration file to disable undesirable information sharing : 
+
+<pre><code class="language-bash">
+sudo nano /etc/nginx/nginx.conf
+</code></pre>
+
+Inside the `http` block add the following:
+
+<pre><code class="language-bash">
+server_name_in_redirect off;
+server_tokens off;
+port_in_redirect off;
+</code></pre>
+Then restart the Nginx server.
+<pre><code class="language-bash">
+sudo systemctl restart nginx
+</code></pre>
+
+#####Web Server Root Directory
+Make a directory to hold our files for the web server.
+
+<pre><code class="language-bash">
+sudo mkdir /var/www/dark_web
+</code></pre>
+
+Make and edit an index.html file for your site for testing purposes.
+
+<pre><code class="language-bash">
+sudo nano /var/www/dark_web/index.html
+</code></pre>
+
+Inside just put anything. We don’t need actual html, just something for right now.
+
+<pre><code class="language-bash">
+Welcome to my dark web page
+</code></pre>
+
+Set the permissions so that Nginx can access the files.
+
+<pre><code class="language-bash">
+sudo chmod 755 /var/www/dark_web
+</code></pre>
+
+#####Remove Nginx Default 
+Remove the default site.
+
+<pre><code class="language-bash">
+sudo rm /etc/nginx/sites-enabled/default
+sudo rm /etc/nginx/sites-available/default
+</code></pre>
+
+#####Add Available Site
+Make a new site in the `sites-available` directory.
+
+<pre><code class="language-bash">
+sudo nano /etc/nginx/sites-available/dark_web
+</code></pre>
+
+Inside add the following replacing the root and server_name values for your instance.
+
+<pre><code class="language-bash">
+server {
+	listen 127.0.0.1:80;
+	root /var/www/dark_web/;
+	index index.html;
+	server_name uhs5lbrjzbbtcsmx.onion;
+}
+</code></pre>
+
+Add this site the the `site_enabled`.
+
+<pre><code class="language-bash">
+sudo ln -s /etc/nginx/sites-available/dark_web /etc/nginx/sites-enabled/
+</code></pre>
+
+Then restart the Nginx server.
+<pre><code class="language-bash">
+sudo systemctl restart nginx
+</code></pre>
+
+#####Conclusion
+Now you have a site on the Dark Web. Any files in the `/var/www/dark_web` will be available on the Tor network. the static site generator should output to this folder.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

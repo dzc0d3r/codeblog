@@ -6,14 +6,14 @@
 <div class="container mt-5">
   {% for child in this.pagination.items %}
   <div data-aos="fade-right"
-    data-aos-delay="850">
+    data-aos-delay="300">
 
     {{ render_blog_post(child, from_index=true) }}
 
   </div>
   {% endfor %}
   <div data-aos="fade-right"
-    data-aos-delay="1200">
+    data-aos-delay="1000">
     {{ render_pagination(this.pagination) }}
 
   </div>

@@ -398,6 +398,12 @@ a:hover {
 .projects #project1 {
   background-image: url("../../images/projects/blog.png");
 }
+.projects #project2 {
+  background-image: url("../../images/projects/skeleton.jpg");
+}
+.projects #project3 {
+  background-image: url("../../images/projects/skeleton.jpg");
+}
 
 
 /*
