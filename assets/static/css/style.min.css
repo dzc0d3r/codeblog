@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap');
+
 /* Variables */ 
 :root{
   --custom-blue: #007580;
@@ -17,6 +20,9 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+body {
+  font-family: 'Lato', sans-serif;
 }
 /*end reset */
 
@@ -405,6 +411,76 @@ a:hover {
   background-image: url("../../images/projects/skeleton.jpg");
 }
 
+.card-profile, .card-about {
+  
+  min-height: 33rem;
+  background-color: var(--custom-grey); 
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+
+  user-select: none;
+  
+}
+.card-profile h5, .card-about h5 {
+  font-size: 1.5rem;
+} 
+.card-profile p, .card-about p {
+  font-size: 1.3rem;
+}
+
+.card-profile img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.about-infos p, .about-infos h5 {
+  display: inline-block;
+  
+}
+.about-infos p {
+  margin-left: 1rem;
+}
+
+.card-image {
+  position: relative;
+}
+.card-about .phrase {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 0.3rem;
+  
+}
+.card-about .phrase .phrase-number {
+  font-size: 1.1rem;
+  color: var(--custom-blue);
+  margin-right: .8rem;
+}
+.phrase-number .phrase-content {
+  display: block;
+}
+
+.card-about .phrase .phrase-content mark {
+  background-color: inherit;
+  color: var(--custom-blue);
+  letter-spacing: .15rem;
+}
+.image-overlay {
+    position: absolute;
+    top: 8px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    transition: .5s ease;
+    background: rgba(254, 208, 73, 0.25);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto
+  }
 
 /*
 .card-overlay {
@@ -441,6 +517,10 @@ pre {
   border-left : var(--custom-blue) solid 0.3rem;
   margin: 1.5rem 0 !important;
   background: var(--custom-grey) !important;
+  
+}
+code {
+  font-family: 'Fira Code', monospace !important;
 }
 .copy-to-clipboard-button {
   background: var(--custom-blue) !important;
@@ -503,7 +583,14 @@ pre {
       width: calc(132% + 1.3px);
       height: 50px;
   }
+  .card-about p, .card-profile p {
+    font-size: 1.1rem;
+  }
+  .card-about h5, .card-profile h5 {
+    font-size: 1.3rem;
+  }
 }
+
 /* End wave shape footer*/
 
 

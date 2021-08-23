@@ -3,19 +3,148 @@
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
 
-<div class="container mt-3 d-flex flex-column justify-content-center ">
-    <div class="card mt-5"
-        style="background-color: inherit; border: none;">
+<section class="about mt-5">
 
-        <div class="card-body text-center">
-            <h5 class="card-title text-muted "><i class="fa fa-cog"
-                    aria-hidden="true"></i> Under Construction ... </h5>
-            <p class="card-text"> Nothing to see here yet! come back later </p>
+    <div class="container mt-5">
+        <div class="row ">
 
+            <div class="col-lg-5 col-md-12 col-sm-12 col-12"
+                data-aos-delay="250"
+                data-aos="zoom-in-up">
+
+                <div class="card card-profile">
+                    <div class="paper-clip">
+                    </div>
+
+                    <div class="card-image mt-3">
+                        <div class="text-center">
+                            <img class="card-img-top  mt-2 mb-2 tags-images"
+                                src="{{ '/images/minified/me.jpeg' | asseturl }} "
+                                alt="walid lamraoui">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="about-infos mt-5">
+                            <div>
+                                <h5> Name : </h5>
+                                <p class="text-muted">Walid Lamraoui </p>
+                            </div>
+                            <div>
+                                <h5> Born : </h5>
+                                <p class="text-muted">06 October 1991 </p>
+                            </div>
+                            <div>
+                                <h5> Degree : </h5>
+                                <p class="text-muted">Nah! 😅 self-taught 💯</p>
+                            </div>
+                            <div>
+                                <h5> Email : </h5>
+                                <p class="text-muted">zc0d3r@protonmail.com </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-12"
+                data-aos-delay="250"
+                data-aos="zoom-in-up">
+
+                <div class="card card-about">
+                    <div class="paper-clip">
+                    </div>
+
+                    <div class="card-body">
+                        <h4 class="text-muted mb-4"> About me </h4>
+                        <div class="phrase">
+                            <span class="phrase-number">1</span>
+                            <span class="phrase-content text-muted">Hi, i'm ... </span>
+                        </div>
+                        <div class="phrase">
+                            <span class="phrase-number">2</span>
+                            <span class="phrase-content">
+                                <mark>Software Engineer </mark>
+                                & <mark>fullstack developer</mark>
+                            </span>
+                        </div>
+                        <div class="phrase">
+                            <span class="phrase-number">3</span>
+                            <span class="phrase-content text-muted">
+                                Currently i do
+                                <mark> fulltime freelancing</mark>
+                            </span>
+                        </div>
+                        <div class="phrase">
+                            <span class="phrase-number">4</span>
+                            <span class="phrase-content text-muted">
+                                I'm a <mark>constant learner</mark>, i adore <mark>learning</mark>/<mark>trying</mark>
+                                new
+                                things<mark>,debugging</mark>
+                                and
+                                <mark>solving problems</mark>
+
+                            </span>
+                        </div>
+                        <div class="phrase">
+                            <span class="phrase-number">5</span>
+                            <span class="phrase-content text-muted">
+                                For me <mark>programming</mark> is <mark>fun</mark>, especially web development
+                            </span>
+                        </div>
+                        <div class="phrase">
+                            <span class="phrase-number">6</span>
+                            <span class="phrase-content text-muted">
+                                When dealing with the <mark>frontend</mark> matters i like to use modern
+                                <mark>JavaScript</mark>
+                                Frameworks/Libraries such
+                                as <mark>Vue</mark> and <mark>React</mark>
+                            </span>
+                        </div>
+                        <div class="phrase">
+                            <span class="phrase-number">7</span>
+                            <span class="phrase-content text-muted">
+                                For
+                                the <mark>backend</mark> developement my prederred languages/tools are
+                                <mark>PHP</mark>
+                                Laravel/Wordpress,
+                                <mark>NodeJS</mark>
+                                Express/Koa/Sails, <mark>Python</mark>
+                                Django/Flask.
+                            </span>
+                        </div>
+                        <div class="phrase">
+                            <span class="phrase-number">8</span>
+                            <span class="phrase-content text-muted">
+                                Also i have <marm>good understanding</marm> of various Databases like <mark>MySQL
+                                </mark>, <mark>PostgreSQL</mark>,
+                                <mark>MongoDB</mark> etc.
+                                Finally i
+                                have a <mark>solid</mark> understanding of <mark>Linux</mark> System Administration, My
+                                prefferd Distros to work
+                                with are
+                                <mark>Debian</mark>, <mark>Ubuntu</mark>, <mark>CentOS</mark>.
+                            </span>
+                        </div>
+
+                        <!-- <img class="card-img-top  mt-2 tags-images"
+                            src="{{ '/images/minified/me.jpg' | asseturl }} "
+                            alt="Card image cap"> -->
+
+                    </div>
+                </div>
+            </div>
 
         </div>
+
     </div>
 
-</div>
+
+
+</section>
+
 
 {% endblock %}
