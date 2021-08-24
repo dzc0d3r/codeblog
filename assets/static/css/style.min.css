@@ -292,6 +292,7 @@ a:hover {
   border-radius: .45rem;
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
   transition: .1s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  min-height: 20rem;
   
  
 }
@@ -705,30 +706,22 @@ img {
 }
 footer a {
   color: var(--white);
-}
-footer a:hover {
-  color: var(--custom-grey);
+  font-size: 2rem !important;
+  
 }
 
-small {
-  font-size: 2rem !important
-}
 
 .bold-text {
   color: #c2c2c2 !important
 }
 
-.mt-55 {
-  margin-top: calc(50px + (60 - 50) * ((100vw - 360px) / (1600 - 360))) !important
-}
+
 
 h3 {
-  font-size: calc(34px + (40 - 34) * ((100vw - 360px) / (1600 - 360))) !important
+  font-size: calc(2rem + (40 - 34) * ((100vw - 360px) / (1600 - 360))) !important
 }
 
-.social {
-  font-size: 2em !important
-}
+
 
 .rights {
   font-size: calc(1em + (12 - 10) * ((100vw - 360px) / (1600 - 360))) !important
@@ -750,6 +743,7 @@ h3 {
       width: calc(132% + 1.3px);
       height: 50px;
   }
+  
   /** About Pages Cards*/
 
   .card-profile , .card-about {
