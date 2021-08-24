@@ -704,13 +704,33 @@ img {
   margin-bottom: 0;
   padding-bottom: 0
 }
-footer a {
+footer a , footer a i{
   color: var(--white);
   font-size: 2rem !important;
+  transition: all .4s ease-in-out;
   
 }
+footer a:hover {
+  color: var(--white) !important;
+}
+footer a:hover i {
+  transform: scale(1.3);
+}
 
+footer .fa-stack-overflow {
+  color: #f48024;
+}
+footer .fa-codepen, footer .fa-medium {
+  color: #3c3c3c;
+}
 
+footer .fa-linkedin{
+  color: #0380c4;
+}
+
+footer .fa-twitter {
+  color: #1da1f2;
+}
 .bold-text {
   color: #c2c2c2 !important
 }
