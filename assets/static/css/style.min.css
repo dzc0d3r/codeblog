@@ -1,5 +1,9 @@
+/** Imports*/
+
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap');
+/** End Imports*/
+
 
 /* Variables */ 
 :root{
@@ -14,9 +18,10 @@
 }
 /* end variables  */
 
+
 /* simple reset*/
 
-* {
+*, ::after, ::before {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -24,10 +29,13 @@
 body {
   font-family: 'Lato', sans-serif;
 }
-/*end reset */
+/* End Reset */
 
-/* bootstrap tweaks*/
 
+/* Bootstrap tweaks*/
+.text-muted {
+  color: #555d63 !important;
+}
 .btn-primary {
   background-color: var(--custom-blue);
   border: none;
@@ -37,7 +45,8 @@ body {
 }
 
 
-/* animations */
+/* Animations */
+
 @keyframes up {
   0% {
     transform: translateY(0);
@@ -102,11 +111,14 @@ body {
 .shakeX {
   animation-name: shakeX;
 }
-/*end animations*/
+
+/** End Animations*/
 
 
 
-/* main styles */ 
+/** Main Styles 
+   Selection, Body, Headings, paragraphs 
+*/
 
 ::selection {
   background: var(--custom-blue);
@@ -128,7 +140,12 @@ h5 {
 p{
   font-size: 1.1rem;
 }
-/* end main styles*/
+mark {
+  padding: .5rem .1rem !important;
+  
+}
+/** End Main Styles*/
+
 
 /* Navbar */
 
@@ -155,11 +172,10 @@ nav {
 .navbar-nav {
    padding-left: .8rem ;
 }
-/* end Navbar*/
+/** End Navbar*/
 
 
-
-/* Navbar links */
+/** Navbar links */
 .navbar-nav li a  {
   text-decoration: none;
   display: inline-block;
@@ -194,12 +210,10 @@ a:hover {
     color : #fff;
 }
 
-/* end Navbar links*/
+/* End Navbar links*/
 
 
-
-
-/* Showcase */
+/** Showcase */
 
 .ayat {
     height: 450px;
@@ -222,8 +236,11 @@ a:hover {
     -moz-transform: skewY(2.4deg);
     -ms-transform: skewY(2.4deg);
 }
+/** End Showcase*/
 
-/* ayat card */
+
+/** Ayat Card */
+
 .ayat {
   margin-bottom: 200px;
 }
@@ -254,12 +271,13 @@ a:hover {
   margin-top: .6rem;
   
 }
-
-/* End Showcase*/ 
-
+/** End Ayat Card*/ 
 
 
-/* Cards */
+
+/** Cards */
+
+/** Home Page Cards */
 .paper-clip {
   width: 60px;
   height: 85px;
@@ -295,7 +313,10 @@ a:hover {
   /* TODO : use width and height in img tag instead*/
 }
 
-/* Projects Cards */
+/** End Home Page Cards*/
+
+
+/** Projects Cards, Projects Page*/
 .projects .card {
  overflow: hidden;
 }
@@ -410,21 +431,28 @@ a:hover {
 .projects #project3 {
   background-image: url("../../images/projects/skeleton.jpg");
 }
+/** End Projects cards , Projects Page*/
+
+
+/** Profile/About card, About Page */
 
 .card-profile, .card-about {
   
   min-height: 33rem;
   background-color: var(--custom-grey); 
   margin-bottom: 2rem;
-  font-size: 1.05rem;
-
+  font-size: 1rem;
   user-select: none;
   
 }
-.card-profile h5, .card-about h5 {
+.card-profile {
+  display: flex;
+  align-items: center;
+}
+.card-profile h5 {
   font-size: 1.5rem;
 } 
-.card-profile p, .card-about p {
+.card-profile p {
   font-size: 1.3rem;
 }
 
@@ -466,8 +494,11 @@ a:hover {
   letter-spacing: .15rem;
   padding: 1rem;
 }
+/** End Profile/About card, About Page */
 
 
+
+/** Contact me Page*/
 .contact-me {
   margin-top: 6rem;
 }
@@ -484,6 +515,7 @@ a:hover {
   
 }
 
+/** Contact Form*/
 .form-group .form-control {
   -webkit-box-shadow: none;
   border-bottom: 1px;
@@ -550,33 +582,6 @@ textarea {
     outline: none;
 }
 
-@media only screen and (max-width: 500px) {
-  .contact-me {
-  margin-top: 2rem;
-}
-.contact-me p {
-  font-size: 1rem;
-}
-.contact-me p span {
-  font-weight: bold ;
-  color: var(--custom-blue);
-  margin-right: .3rem;
-}
-.contact {
-  width: 90%;
-  
-}
-    .btn-mod.btn-large {
-       padding: 6px 16px;
-       font-size: 11px;
-    }
-  
-    .form-title {
-        font-size: 20px;
-
-  }
-}
-
 
 .image-overlay {
     position: absolute;
@@ -593,12 +598,15 @@ textarea {
     height: 150px;
     border-radius: 50%;
     margin: 0 auto
-  }
+}
+/** End Contact Form */
+/** End Contact Page*/
 
 
 
+/** Blog Post style */
 
-/* code syntax*/
+/** Code Syntax, Pre */
 pre {
   border-left : var(--custom-blue) solid 0.3rem;
   margin: 1.5rem 0 !important;
@@ -622,11 +630,10 @@ code {
   color: #fff !important;
 }
 
-/* end code syntax*/
+/* End Code Syntax, Pre*/
 
 
-/* Pagination */ 
-
+/** Pagination */ 
 .pagination li a {
   color: var(--heading-color);
   background-color: var(--custom-grey);
@@ -638,13 +645,36 @@ code {
 .pagination .disabled > a  {
   background-color: var(--custom-grey) !important;
 }
-
 /* End Pagination */
 
-/* wave shape footer*/
+/* Posts styles */
+.meta a {
+  margin-right: .25rem;
+}
+.blog-post ul {
+  margin-left: 4rem;
+  font-size: 1.1rem;
+}
+
+/* a workaround to make all photos responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/** End Posts Styles */
+
+/** End Blog Post style */
+
+
+
+
+/** Foooter*/
+
+/* Wave shape footer*/
 .custom-shape-divider-bottom-1623373495 {
   position: relative;
-  bottom: -10rem;
+  bottom: -7rem;
   left: 0;
   width: 100%;
   overflow: hidden;
@@ -662,29 +692,12 @@ code {
 .custom-shape-divider-bottom-1623373495 .shape-fill {
   fill: var(--custom-blue);
 }
+/** End Wave shape footer*/
 
-/** For mobile devices **/
-@media (max-width: 767px) {
-  .custom-shape-divider-bottom-1623373495 svg {
-      width: calc(132% + 1.3px);
-      height: 50px;
-  }
-  .card-about p, .card-profile p {
-    font-size: 1.1rem;
-  }
-  .card-about h5, .card-profile h5 {
-    font-size: 1.3rem;
-  }
-}
-
-/* End wave shape footer*/
-
-
-/* footer */
 
 .container-fluid  {
   overflow: hidden;
-  margin-top: 10rem;
+  margin-top: 7rem;
   background: var(--custom-blue);
   color: var(--custom-grey) !important;
   margin-bottom: 0;
@@ -720,21 +733,74 @@ h3 {
 .rights {
   font-size: calc(1em + (12 - 10) * ((100vw - 360px) / (1600 - 360))) !important
 }
+/** End Footer*/
 
 
 
 
-/* Posts styles */
-.meta a {
-  margin-right: .25rem;
+
+
+/** Media Queries For mobile devices **/
+
+@media (max-width: 767px) {
+
+  /** Waves shade footer */
+
+  .custom-shape-divider-bottom-1623373495 svg {
+      width: calc(132% + 1.3px);
+      height: 50px;
+  }
+  /** About Pages Cards*/
+
+  .card-profile , .card-about {
+    min-height: 25rem;
+  }
+  .card-profile p {
+    font-size: 1rem;
+  }
+  .card-profile h5 {
+    font-size: 1.2rem;
+  }
+  .card-about h4 {
+    font-size: 1.5rem;
+  }
+  .card-about .phrase .phrase-content {
+    font-size: 1rem;
+  }
+  .card-about .phrase .phrase-number {
+    font-size: .8rem;
+    margin-top: .2rem;
+  }
 }
-.blog-post ul {
-  margin-left: 4rem;
-  font-size: 1.1rem;
+
+@media only screen and (max-width: 500px) {
+
+  /** Contact Page : form, Heading, etc */
+
+  .contact-me {
+    margin-top: 2rem;
+  }
+  .contact-me p {
+    font-size: 1rem;
+  }
+  .contact-me p span {
+    font-weight: bold ;
+    color: var(--custom-blue);
+    margin-right: .3rem;
+  }
+  .contact {
+    width: 90%;
+  
+  }
+  .btn-mod.btn-large {
+    padding: 6px 16px;
+    font-size: 11px;
+  }
+  
+  .form-title {
+    font-size: 20px;
+
+  }
 }
 
-/* a workaround to make all photos responsive */
-img {
-  max-width: 100%;
-  height: auto;
-}
+
