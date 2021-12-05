@@ -511,8 +511,17 @@ a:hover {
   color: var(--custom-blue);
   margin-right: .3rem;
 }
+.contact-me h4 {
+  animation: shakeX 1.5s ease-in-out;
+  animation-delay: 2s;
+  
+}
 .contact {
   width: 90%;
+  
+}
+.fa-envelope-o {
+  color: var(--custom-blue);
   
 }
 
@@ -707,14 +716,14 @@ img {
 footer a , footer a i{
   color: var(--white);
   font-size: 2rem !important;
-  transition: all .4s ease-in-out;
+  transition: all .2s ease-in-out;
   
 }
 footer a:hover {
   color: var(--white) !important;
 }
 footer a:hover i {
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
 
 footer .fa-stack-overflow {
