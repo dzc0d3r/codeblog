@@ -1,0 +1,77 @@
+title:
+
+How to install Java and start developing JavaFX applications on Manjaro Linux 
+---
+tags:
+
+Java
+OpenJDK
+JavaFX
+Manjaro
+Arch
+Arch-Based
+---
+body:
+
+Arch Linux itself and Manjaro only officially support the OpenJDK, as that is the non-proprietary version. However, the Oracle package can be installed from the AUR as well, but it's not the recommended way  to install anything. In fact since i made the decision to start using Manjaro i never used the AUR to install anything as there a lot of security  and even stability concerns. 
+
+So we will only discuss installing OpenJDK from the official repositories.
+All of the OpenJDK packages can be installed in terminal with pacman.  you can search for openjdk yourself to see what version suits you  by running : 
+ ```bash
+pacman -Ss openjdk
+```
+The packages you need will depend on what kind of programs you’re developing. We’ll go through all the options below. You can also choose between versions.
+- Headless JRE = minimal Java runtime, used for executing non-GUI Java programs.
+- Full JRE = full Java runtime, used for executing GUI Java programs.
+- JDK = Java Development Kit, always needed for developing Java programs.
+- Documentation = JDK help pages.
+- Sources = JDK source files.
+
+
+##### Install OpenJDK 18 
+the default version at the time of writing this post is openjdk18 .. to install the default version just run the following :
+```bash 
+sudo pacman -S jre-openjdk-headless jre-openjdk jdk-openjdk openjdk-doc openjdk-src
+```
+##### Test Your Java Installation
+You can check if Java is installed and see what version you’re running by executing this command:
+```bash
+java -version
+```
+This should return something like :
+```bash 
+openjdk version "18.0.2" 2022-07-19
+OpenJDK Runtime Environment (build 18.0.2+0)
+OpenJDK 64-Bit Server VM (build 18.0.2+0, mixed mode)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+---
+pub_date: 2022-10-07
+---
+twitter_handle: dzc0d3r
