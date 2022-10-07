@@ -44,8 +44,65 @@ openjdk version "18.0.2" 2022-07-19
 OpenJDK Runtime Environment (build 18.0.2+0)
 OpenJDK 64-Bit Server VM (build 18.0.2+0, mixed mode)
 ```
+##### Installing JavaFX
+Now we installed OpenJDK successfully and tested our Java Installation, it's time to install JavaFX, and by JavaFX i mean OpenJFX. With same steps we did when installing OpenJDK let's search for OpenJFX by running :
+```bash
+pacman -Ss openjfx
+```
+Again you will need to choose the version you wish to install. For me i will simply go the default version 18. and run the following commands :
+```bash
+pacman -S java-openjfx java-openjfx-doc java-openjfx-src
+```
+
+##### Show Time 
+After successfully installing OpenJFX, it's time to write a hello world GUI application to test thing out. In the terminal run ```nano HelloFX.java``` and paste the following code:
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class HelloFX extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        Scene scene = new Scene(new StackPane(l), 640, 480);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+}
+```
+
+Next we need to compile it by running this command :
+```bash
+javac --module-path /usr/lib/jvm/java-18-openjdk/lib/javafx.base.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.controls.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.graphics.jar --add-modules javafx.controls HelloFX.java
+```
+
+Finally run the program :
+```bash
+java --module-path /usr/lib/jvm/java-18-openjdk/lib/javafx.base.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.controls.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.graphics.jar --add-modules javafx.controls HelloFX.java 
+```
+You Should see a window popping up
+
+![lektorcms ](/images/minified/javaFX.png)
 
 
+
+##### ⚠️ Warning 
+if you don't explicitly add ```javafx.base.jar``` , ```javafx.controls.jar```, ```javafx.graphics.jar``` and instead used just ```/usr/lib/jvm/java-18-openjdk/lib``` you will run to an ```java.lang.LayerInstantiationException```  : Package jdk.internal.jimage.decompressor in both module java.base and module jrt.fs  because  on Arch both JDK and JavaFX libs are mixed in the same folder and cause the issue
+
+##### Conclusion 
+In this post, we learned how to install Java OpenJDK as well as OpenJFX, on Manjaro Linux. We also saw how to compile and run a JavaFX application , Now you will be able to develop all manner of Java programs and JavaFX on your Manjaro system.
+ 
 
 
 
@@ -75,3 +132,5 @@ OpenJDK 64-Bit Server VM (build 18.0.2+0, mixed mode)
 pub_date: 2022-10-07
 ---
 twitter_handle: dzc0d3r
+---
+author: Walid Lamraoui
