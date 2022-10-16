@@ -1,0 +1,33 @@
+title: Install .NET core on Manjaro Linux and start developping C# applications
+---
+author: Walid Lamraoui
+---
+body:
+
+##### Introduction
+.NET is an open-source development framework platform available free to use and install on all popular operating systems such as Windows, GNU/Linux, and macOS operating systems. It is cross-platform, and a successor of the proprietary .NET Framework primarily developed by Microsoft employees under the .NET Foundation.
+It is built on a high-performance runtime that is used in production by many high-scale apps as mentioned in Microsoft Docs
+
+If we talk about .NET Developers, then they are software developers who develop programs and technologies using the Microsoft Dot NET platform. Although .NET supports the C#, F#, and Visual Basic (VB.NET) programming languages, programmers prefer C# in most cases because it allows the  .NET specialists to develop different types of software: from the ordinary web and desktop applications to mobile applications and games.
+##### Advantages of .NET
+   -  Offers seamless horizontal scalability where you can easily find tools in the Microsoft Developer Network
+   - Enables the development of a wide range of applications on various platforms
+   - Offers flexible deployment and easy maintenance
+   - Supports code sharing and code reusability 
+   -  Provides efficient data access and an integrated programming environment
+   - Includes automated memory management
+Not to mention that .NET looks really wide and the future of .NET is very bright. it proved itself a modern, reliable, secure, powerful & versatile framework in the last 20 years suitable for all platforms & from small to enterprise level software. No doubt that .NET has been improving over the years and brings new features with the every new update.
+
+##### Installation
+There are official Arch Linux packages with the .NET Core SDK now. 
+so simply search for 
+---
+tags:
+
+manjaro
+.net core
+linux
+c#
+dotenet
+---
+twitter_handle: @dzc0d3r
