@@ -1,4 +1,6 @@
-title: Install .NET core on Manjaro Linux and start developping C# applications
+title:
+
+Install .NET core on Manjaro Linux and start developping 
 ---
 author: Walid Lamraoui
 ---
@@ -19,8 +21,39 @@ If we talk about .NET Developers, then they are software developers who develop 
 Not to mention that .NET looks really wide and the future of .NET is very bright. it proved itself a modern, reliable, secure, powerful & versatile framework in the last 20 years suitable for all platforms & from small to enterprise level software. No doubt that .NET has been improving over the years and brings new features with the every new update.
 
 ##### Installation
-There are official Arch Linux packages with the .NET Core SDK now. 
-so simply search for 
+If you want to develop applications, the best way is to use the Manjaro repositories and install the .NET Core SDK
+Search for ```dotnet-sdk```
+```bash
+pacman -Ss dotnet-sdk ``` 
+You can install this with Pacman:
+```bash 
+pacman -S dotnet-sdk```
+if you want the ASP.Net Runtime also search for ```aspnet-runtime: 
+```bash
+pacman -Ss aspnet-runtime```
+Then install by running : 
+```bash 
+pacman -S dotnet-sdk```
+
+##### Create a new application
+Let’s create a new Blazor application to test the .NET SDK on our Manjaro machine. Type in the following:
+```bash
+dotnet new blazorserver -o BlazorTest --no-https
+```
+This will create a new Blazor application.
+let's run it :
+```bash
+cd BlazorTest
+dotnet watch
+```
+Using ```dotnet watch``` you can run your application and use hot reload. This way you can make changes in real time.
+
+
+
+
+
+
+
 ---
 tags:
 
