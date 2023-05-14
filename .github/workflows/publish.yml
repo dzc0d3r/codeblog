@@ -26,6 +26,6 @@ jobs:
     - name: Publish site
       env:
         LEKTOR_DEPLOY_USERNAME: dzc0d3r
-        LEKTOR_DEPLOY_PASSWORD: ${{ secrets.LEKTOR_DEPLOY_PASSWORD }}
+        LEKTOR_DEPLOY_PASSWORD: ${{ secrets.LEKTOR_PASSWORD }}
       run: |
-        lektor deploy ghpages
+        lektor deploy ghpages-https
