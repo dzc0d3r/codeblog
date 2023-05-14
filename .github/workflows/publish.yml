@@ -23,7 +23,12 @@ jobs:
       run: |
         lektor plugins reinstall
         lektor build --no-prune
+
+
     - name: Publish site
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+    
 
       run: |
         lektor deploy ghpages
