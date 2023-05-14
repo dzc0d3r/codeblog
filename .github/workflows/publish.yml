@@ -26,4 +26,4 @@ jobs:
     - name: Publish site
 
       run: |
-        lektor deploy ghpages-https
+        lektor deploy ghpages
