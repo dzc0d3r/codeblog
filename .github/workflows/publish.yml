@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: "3.X"
     - uses: actions/cache@v2
@@ -31,8 +31,9 @@ jobs:
 
 
     - name: Publish site
-      env:
-        
-        LEKTOR_DEPLOY_PASSWORD: ${{ secrets.LEKTOR_DEPLOY_PASSWORD }}
+    
       run: |
         lektor deploy ghpages-https
+      env:
+        LEKTOR_DEPLOY_USERNAME: dzc0d3r
+        LEKTOR_DEPLOY_PASSWORD: ${{ secrets.LEKTOR_DEPLOY_PASSWORD }}
