@@ -26,9 +26,5 @@ jobs:
 
 
     - name: Publish site
-      with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-    
-
       run: |
         lektor deploy ghpages
