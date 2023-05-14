@@ -28,4 +28,4 @@ jobs:
         LEKTOR_DEPLOY_USERNAME: dzc0d3r
         LEKTOR_DEPLOY_PASSWORD: ${{ secrets.LEKTOR_DEPLOY_PASSWORD }}
       run: |
-        lektor deploy ghpages-https
+        lektor deploy ghpages
