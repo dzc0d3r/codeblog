@@ -24,8 +24,6 @@ jobs:
         lektor plugins reinstall
         lektor build --no-prune
     - name: Publish site
-      env:
-        LEKTOR_DEPLOY_USERNAME: dzc0d3r
-        LEKTOR_DEPLOY_PASSWORD: ${{ secrets.LEKTOR_PASSWORD }}
+
       run: |
         lektor deploy ghpages-https
