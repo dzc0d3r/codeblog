@@ -3,7 +3,7 @@ name = codeblog
 url = https://dzc0d3r.github.io/codeblog/
 
 [servers.ghpages-https]
-target = ghpages+https:://dzc0d3r/dzc0d3r.github.io/codeblog
+target = ghpages+https:://dzc0d3r/codeblog
 
 
 
