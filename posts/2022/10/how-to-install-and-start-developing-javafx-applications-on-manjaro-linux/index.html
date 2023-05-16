@@ -1,12 +1,236 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta content="Walid Lamraoui (dzc0d3r) Blog .. This blog is about : programming, web developement, Frontend, Backend, DevOps, Penetration testing, Gnu/Linux and more" name="description"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="../../../../images/minified/logo.ico?h=aada122e" rel="shortcut icon" type="image/x-icon"/><link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" referrerpolicy="no-referrer" rel="stylesheet"/><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/><link href="../../../../static/css/prism.min.css?h=95707fd2" rel="stylesheet"/><link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/><link href="../../../../static/css/style.min.css?h=e2f77a7c" rel="stylesheet"/><title>How to install and start developing JavaFX applications on Manjaro Linux</title></head><body data-prismjs-copy-timeout="800"><nav class="navbar navbar-expand-lg navbar-dark bg-primary py-4"><div class="container"><a class="navbar-brand" data-aos="fade-right" data-aos-delay="50" data-aos-duration="900" data-aos-easing="ease-in-out" data-aos-offset="50" data-aos-once="false" href="../../../../"><span>&lt;</span> DzC0d3R <span>/&gt;</span></a><button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><div class="navbar-collapse collapse" id="navbarColor02"><ul class="navbar-nav ml-auto" data-aos="fade-left" data-aos-delay="50" data-aos-duration="900" data-aos-easing="ease-in-out" data-aos-offset="50" data-aos-once="false"><li><a class="linky nav-link" href="../../../../">Home</a></li><li class="active"><a class="linky nav-link" href="../../../">Posts</a></li><li><a class="linky nav-link" href="../../../../projects/">Projects</a></li><li><a class="linky nav-link" href="../../../../contact/">Contact</a></li><li><a class="linky nav-link" href="../../../../about/">About</a></li></ul></div></div></nav><main class="page"><div class="container mt-5"><div class="tags ml-2 pl-1"><a class="p-0 m-1" href="../../../java/"><span class="badge">java</span></a> <a class="p-0 m-1" href="../../../openjdk/"><span class="badge">openjdk</span></a> <a class="p-0 m-1" href="../../../openjfx/"><span class="badge">openjfx</span></a> <a class="p-0 m-1" href="../../../javafx/"><span class="badge">javafx</span></a> <a class="p-0 m-1" href="../../../manjaro/"><span class="badge">manjaro</span></a> <a class="p-0 m-1" href="../../../linux/"><span class="badge">linux</span></a> <a class="p-0 m-1" href="../../../gui/"><span class="badge">gui</span></a></div><div class="container mt-1"><div class="blog-post"><h4>How to install and start developing JavaFX applications on Manjaro Linux</h4><p>Arch Linux itself and Manjaro only officially support the OpenJDK, as that is the non-proprietary version. However, the Oracle package can be installed from the AUR as well, but it's not the recommended way to install anything. In fact since i made the decision to start using Manjaro i never used the AUR to install anything as there a lot of security and even stability concerns.</p><p>So we will only discuss installing OpenJDK from the official repositories. All of the OpenJDK packages can be installed in terminal with pacman. you can search for openjdk yourself to see what version suits you by running :</p><pre><code class="lang-bash">pacman -Ss openjdk
-</code></pre><p>The packages you need will depend on what kind of programs you’re developing. We’ll go through all the options below. You can also choose between versions.</p><ul><li>Headless JRE = minimal Java runtime, used for executing non-GUI Java programs.</li><li>Full JRE = full Java runtime, used for executing GUI Java programs.</li><li>JDK = Java Development Kit, always needed for developing Java programs.</li><li>Documentation = JDK help pages.</li><li>Sources = JDK source files.</li></ul><h5>Install OpenJDK 18</h5><p>the default version at the time of writing this post is openjdk18 .. to install the default version just run the following :</p><pre><code class="lang-bash">sudo pacman -S jre-openjdk-headless jre-openjdk jdk-openjdk openjdk-doc openjdk-src
-</code></pre><h5>Test Your Java Installation</h5><p>You can check if Java is installed and see what version you’re running by executing this command:</p><pre><code class="lang-bash">java -version
-</code></pre><p>This should return something like :</p><pre><code class="lang-bash">openjdk version "18.0.2" 2022-07-19
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="description"
+  content="Walid Lamraoui (dzc0d3r) Blog .. This blog is about : programming, web developement, Frontend, Backend, DevOps, Penetration testing, Gnu/Linux and more" />
+
+<!-- viewport -->
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+<link rel="shortcut icon"
+  href="../../../../images/minified/logo.ico?h=aada122e"
+  type="image/x-icon">
+
+<!-- Begin css file -->
+<!-- bootstrap 4 -->
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+  integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer" />
+<!-- font-awesome -->
+<link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- prism css-->
+<link rel="stylesheet"
+  href="../../../../static/css/prism.min.css?h=95707fd2">
+
+<!-- AOS CSS -->
+<link rel="stylesheet"
+  href="https://unpkg.com/aos@next/dist/aos.css" />
+
+<!-- Custom css -->
+<link rel="stylesheet"
+  href="../../../../static/css/style.min.css?h=e2f77a7c">
+
+
+<!-- Google tag (gtag.js) -->
+<script async
+  src="https://www.googletagmanager.com/gtag/js?id=G-ST87D0RGPJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-ST87D0RGPJ');
+</script>
+
+
+
+
+<!-- end css files -->
+<title>How to install and start developing JavaFX applications on Manjaro Linux</title>
+
+<body data-prismjs-copy-timeout="800">
+  <!-- Begin NavBar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-4">
+    <div class="container">
+
+      <a data-aos="fade-right"
+        data-aos-offset="50"
+        data-aos-delay="50"
+        data-aos-duration="900"
+        data-aos-easing="ease-in-out"
+        data-aos-once="false"
+        class="navbar-brand "
+        href="../../../../">
+        <span>
+          < </span>
+            DzC0d3R
+            <span>
+              /> </span>
+      </a>
+      <button class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarColor02"
+        aria-controls="navbarColor02"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse"
+        id="navbarColor02">
+        <ul data-aos="fade-left"
+          data-aos-offset="50"
+          data-aos-delay="50"
+          data-aos-duration="900"
+          data-aos-easing="ease-in-out"
+          data-aos-once="false"
+          class="navbar-nav ml-auto">
+          <li><a class="linky nav-link"
+              href="../../../../">Home</a></li>
+            
+            <li
+              class="active"
+              ><a class="linky nav-link"
+                href="../../../">Posts</a></li>
+              
+            <li><a class="linky nav-link"
+                href="../../../../projects/">Projects</a></li>
+              
+            <li><a class="linky nav-link"
+                href="../../../../contact/">Contact</a></li>
+              
+            <li><a class="linky nav-link"
+                href="../../../../about/">About</a></li>
+              
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End NavBar-->
+
+
+  <main class="page">
+    
+<div class="container mt-5">
+
+
+  
+  <div class="tags ml-2 pl-1">
+    <a class="p-0 m-1"
+      href="../../../java/">
+      <span class="
+          badge ">
+        java
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../openjdk/">
+      <span class="
+          badge ">
+        openjdk
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../openjfx/">
+      <span class="
+          badge ">
+        openjfx
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../javafx/">
+      <span class="
+          badge ">
+        javafx
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../manjaro/">
+      <span class="
+          badge ">
+        manjaro
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../linux/">
+      <span class="
+          badge ">
+        linux
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../gui/">
+      <span class="
+          badge ">
+        gui
+      </span>
+    </a>
+
+
+    
+  </div>
+  
+
+  <div class="container mt-1">
+    
+<div class="blog-post">
+  
+  <h4>How to install and start developing JavaFX applications on Manjaro Linux</h4>
+  
+
+  <p>Arch Linux itself and Manjaro only officially support the OpenJDK, as that is the non-proprietary version. However, the Oracle package can be installed from the AUR as well, but it's not the recommended way  to install anything. In fact since i made the decision to start using Manjaro i never used the AUR to install anything as there a lot of security  and even stability concerns.</p>
+<p>So we will only discuss installing OpenJDK from the official repositories.
+All of the OpenJDK packages can be installed in terminal with pacman.  you can search for openjdk yourself to see what version suits you  by running :</p>
+<pre><code class="lang-bash">pacman -Ss openjdk
+</code></pre>
+<p>The packages you need will depend on what kind of programs you’re developing. We’ll go through all the options below. You can also choose between versions.</p>
+<ul>
+<li>Headless JRE = minimal Java runtime, used for executing non-GUI Java programs.</li>
+<li>Full JRE = full Java runtime, used for executing GUI Java programs.</li>
+<li>JDK = Java Development Kit, always needed for developing Java programs.</li>
+<li>Documentation = JDK help pages.</li>
+<li>Sources = JDK source files.</li>
+</ul>
+<h5>Install OpenJDK 18</h5>
+<p>the default version at the time of writing this post is openjdk18 .. to install the default version just run the following :</p>
+<pre><code class="lang-bash">sudo pacman -S jre-openjdk-headless jre-openjdk jdk-openjdk openjdk-doc openjdk-src
+</code></pre>
+<h5>Test Your Java Installation</h5>
+<p>You can check if Java is installed and see what version you’re running by executing this command:</p>
+<pre><code class="lang-bash">java -version
+</code></pre>
+<p>This should return something like :</p>
+<pre><code class="lang-bash">openjdk version &quot;18.0.2&quot; 2022-07-19
 OpenJDK Runtime Environment (build 18.0.2+0)
 OpenJDK 64-Bit Server VM (build 18.0.2+0, mixed mode)
-</code></pre><h5>Installing JavaFX</h5><p>Now we installed OpenJDK successfully and tested our Java Installation, it's time to install JavaFX, and by JavaFX i mean OpenJFX. With same steps we did when installing OpenJDK let's search for OpenJFX by running :</p><pre><code class="lang-bash">pacman -Ss openjfx
-</code></pre><p>Again you will need to choose the version you wish to install. For me i will simply go the default version 18. and run the following commands :</p><pre><code class="lang-bash">pacman -S java-openjfx java-openjfx-doc java-openjfx-src
-</code></pre><h5>Show Time</h5><p>After successfully installing OpenJFX, it's time to write a hello world GUI application to test thing out. In the terminal run <code>nano HelloFX.java</code> and paste the following code:</p><pre><code class="lang-java">import javafx.application.Application;
+</code></pre>
+<h5>Installing JavaFX</h5>
+<p>Now we installed OpenJDK successfully and tested our Java Installation, it's time to install JavaFX, and by JavaFX i mean OpenJFX. With same steps we did when installing OpenJDK let's search for OpenJFX by running :</p>
+<pre><code class="lang-bash">pacman -Ss openjfx
+</code></pre>
+<p>Again you will need to choose the version you wish to install. For me i will simply go the default version 18. and run the following commands :</p>
+<pre><code class="lang-bash">pacman -S java-openjfx java-openjfx-doc java-openjfx-src
+</code></pre>
+<h5>Show Time</h5>
+<p>After successfully installing OpenJFX, it's time to write a hello world GUI application to test thing out. In the terminal run <code>nano HelloFX.java</code> and paste the following code:</p>
+<pre><code class="lang-java">import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -16,9 +240,9 @@ public class HelloFX extends Application {
 
     @Override
     public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        String javaVersion = System.getProperty(&quot;java.version&quot;);
+        String javafxVersion = System.getProperty(&quot;javafx.version&quot;);
+        Label l = new Label(&quot;Hello, JavaFX &quot; + javafxVersion + &quot;, running on Java &quot; + javaVersion + &quot;.&quot;);
         Scene scene = new Scene(new StackPane(l), 640, 480);
         stage.setScene(scene);
         stage.show();
@@ -29,9 +253,39 @@ public class HelloFX extends Application {
     }
 
 }
-</code></pre><p>Next we need to compile it by running this command :</p><pre><code class="lang-bash">javac --module-path /usr/lib/jvm/java-18-openjdk/lib/javafx.base.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.controls.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.graphics.jar --add-modules javafx.controls HelloFX.java
-</code></pre><p>Finally run the program :</p><pre><code class="lang-bash">java --module-path /usr/lib/jvm/java-18-openjdk/lib/javafx.base.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.controls.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.graphics.jar --add-modules javafx.controls HelloFX.java
-</code></pre><p>You Should see a window popping up</p><p><img alt="lektorcms " src="../../../../images/minified/javaFX.png"/></p><h5>⚠️ Warning</h5><p>if you don't explicitly add <code>javafx.base.jar</code> , <code>javafx.controls.jar</code>, <code>javafx.graphics.jar</code> and instead used just <code>/usr/lib/jvm/java-18-openjdk/lib</code> you will run to an <code>java.lang.LayerInstantiationException</code> : Package jdk.internal.jimage.decompressor in both module java.base and module jrt.fs because on Arch both JDK and JavaFX libs are mixed in the same folder and cause the issue</p><h5>Conclusion</h5><p>In this post, we learned how to install Java OpenJDK as well as OpenJFX, on Manjaro Linux. We also saw how to compile and run a JavaFX application , Now you will be able to develop all manner of Java programs and JavaFX on your Manjaro system.</p><p class="meta">Written By: <a href="https://twitter.com/dzc0d3r">Walid Lamraoui</a>on 2022-10-07</p></div></div><div class="container mt-3 mb-5"><div class="comments"><div id="disqus_thread"></div><script>
+</code></pre>
+<p>Next we need to compile it by running this command :</p>
+<pre><code class="lang-bash">javac --module-path /usr/lib/jvm/java-18-openjdk/lib/javafx.base.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.controls.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.graphics.jar --add-modules javafx.controls HelloFX.java
+</code></pre>
+<p>Finally run the program :</p>
+<pre><code class="lang-bash">java --module-path /usr/lib/jvm/java-18-openjdk/lib/javafx.base.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.controls.jar:/usr/lib/jvm/java-18-openjdk/lib/javafx.graphics.jar --add-modules javafx.controls HelloFX.java
+</code></pre>
+<p>You Should see a window popping up</p>
+<p><img src="../../../../images/minified/javaFX.png" alt="lektorcms "></p>
+<h5>⚠️ Warning</h5>
+<p>if you don't explicitly add <code>javafx.base.jar</code> , <code>javafx.controls.jar</code>, <code>javafx.graphics.jar</code> and instead used just <code>/usr/lib/jvm/java-18-openjdk/lib</code> you will run to an <code>java.lang.LayerInstantiationException</code>  : Package jdk.internal.jimage.decompressor in both module java.base and module jrt.fs  because  on Arch both JDK and JavaFX libs are mixed in the same folder and cause the issue</p>
+<h5>Conclusion</h5>
+<p>In this post, we learned how to install Java OpenJDK as well as OpenJFX, on Manjaro Linux. We also saw how to compile and run a JavaFX application , Now you will be able to develop all manner of Java programs and JavaFX on your Manjaro system.</p>
+
+  <p class="meta">
+    Written By:
+    
+    <a href="https://twitter.com/dzc0d3r">Walid Lamraoui</a>on
+    2022-10-07
+    
+  </p>
+</div>
+
+  </div>
+
+
+  <div class="
+      container
+      mt-3
+      mb-5">
+    <div class="comments">
+<div id="disqus_thread"></div>
+<script>
   var disqus_config = function() { this.page.identifier = "/posts/how-to-install-and-start-developing-javafx-applications-on-manjaro-linux"; this.page.url = "https://dzc0d3r.github.io/codeblog/posts/2022/10/how-to-install-and-start-developing-javafx-applications-on-manjaro-linux/"; };
   (function() {
     var d = document, s = d.createElement('script');
@@ -39,4 +293,121 @@ public class HelloFX extends Application {
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
   })();
-</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div></div></div></main><div class="custom-shape-divider-bottom-1623373495"><svg data-name="Layer 1" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path class="shape-fill" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path></svg></div><div class="container-fluid custom-fluid pb-0 mb-0 justify-content-center text-light"><footer><div class="container"><div class="row py-5"><div class="col-12"><div class="row"><div class="col-xl-8 col-md-6 col-sm-4 col-12 mx-auto d-none d-md-block"><h3 class="text-muted mb-md-0 bold-text">DzC0d3R</h3></div><div class="col-xl-4 col-md-6 col-sm-8 col-12 px-2"><a class="mx-2" href="https://github.com/dzc0d3r" target="_blank"><i aria-hidden="true" class="fa fa-github"></i></a> <a class="mx-2" href="https://www.linkedin.com/in/walid-lamraoui/" target="_blank"><i aria-hidden="true" class="fa fa-linkedin"></i></a> <a class="mx-2" href="https://stackoverflow.com/users/8990846/walid-lamraoui" target="_blank"><i aria-hidden="true" class="fa fa-stack-overflow"></i></a> <a class="mx-2" href="https://twitter.com/dzc0d3r" target="_blank"><i aria-hidden="true" class="fa fa-twitter"></i></a> <a class="mx-2" href="https://codepen.io/walid-lamraoui" target="_blank"><i aria-hidden="true" class="fa fa-codepen"></i></a> <a class="mx-2" href="	https://medium.com/@walid.lamraoui" target="_blank"><i aria-hidden="true" class="fa fa-medium"></i></a></div></div></div><div class="col-12"><div class="row ml-1 mt-3"><p class="rights">Copyright ©<script>document.write(new Date().getFullYear())</script>,  All Rights Reserved</p></div></div></div></div></footer></div><script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script><script crossorigin="anonymous" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script><script src="../../../../static/js/prism.min.js?h=9b543dfb"></script><script src="https://unpkg.com/aos@next/dist/aos.js"></script><script src="../../../../static/js/app.min.js?h=ee69aafa"></script></body></html>
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+  </div>
+
+
+</div>
+
+
+  </main>
+
+
+
+
+  <div class="custom-shape-divider-bottom-1623373495">
+    <svg data-name="Layer 1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none">
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <!-- Begin Footer-->
+
+  <div class="container-fluid custom-fluid pb-0 mb-0 justify-content-center text-light ">
+    <!-- Custom divider -->
+    <footer>
+      <div class="container">
+        <div class="row py-5">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-xl-8 col-md-6 col-sm-4 col-12 mx-auto d-none d-md-block">
+                <h3 class="text-muted mb-md-0 bold-text">DzC0d3R</h3>
+
+              </div>
+
+              <div class="col-xl-4 col-md-6 col-sm-8 col-12 px-2">
+                <a href="https://github.com/dzc0d3r"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-github"
+                    aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/walid-lamraoui/"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-linkedin"
+                    aria-hidden="true"></i></a>
+                <a href="https://stackoverflow.com/users/8990846/walid-lamraoui"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-stack-overflow"
+                    aria-hidden="true"></i></a>
+                <a href="https://twitter.com/dzc0d3r"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-twitter"
+                    aria-hidden="true"></i></a>
+                <a href="https://codepen.io/walid-lamraoui"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-codepen"
+                    aria-hidden="true"></i></a>
+                <a href="	https://medium.com/@walid.lamraoui"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-medium"
+                    aria-hidden="true"></i></a>
+
+              </div>
+
+
+
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row ml-1 mt-3">
+              <p class="rights">
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear())</script>,&nbsp; All Rights Reserved
+              </p>
+              <!-- <a class="rights"
+                                href="http://uhs5lbrjzbbtcsmx.onion/"
+                                style="color: #fed049">
+                                Visit this website on the DARK WEB
+                              </a> -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </footer>
+  </div>
+  <!-- End  Footer-->
+
+  <!-- Begin javascript files -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"
+    integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+
+  <script src="../../../../static/js/prism.min.js?h=9b543dfb"></script>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+  <script src="../../../../static/js/app.min.js?h=ee69aafa"></script>
+
+
+
+  <!-- End javascript files -->
+</body>
+
+</html>

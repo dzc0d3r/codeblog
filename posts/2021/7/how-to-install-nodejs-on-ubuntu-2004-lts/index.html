@@ -1,13 +1,206 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta content="Walid Lamraoui (dzc0d3r) Blog .. This blog is about : programming, web developement, Frontend, Backend, DevOps, Penetration testing, Gnu/Linux and more" name="description"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="../../../../images/minified/logo.ico?h=aada122e" rel="shortcut icon" type="image/x-icon"/><link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" referrerpolicy="no-referrer" rel="stylesheet"/><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/><link href="../../../../static/css/prism.min.css?h=95707fd2" rel="stylesheet"/><link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/><link href="../../../../static/css/style.min.css?h=e2f77a7c" rel="stylesheet"/><title>How To Install Node.js on Ubuntu 20.04 LTS</title></head><body data-prismjs-copy-timeout="800"><nav class="navbar navbar-expand-lg navbar-dark bg-primary py-4"><div class="container"><a class="navbar-brand" data-aos="fade-right" data-aos-delay="50" data-aos-duration="900" data-aos-easing="ease-in-out" data-aos-offset="50" data-aos-once="false" href="../../../../"><span>&lt;</span> DzC0d3R <span>/&gt;</span></a><button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button><div class="navbar-collapse collapse" id="navbarColor02"><ul class="navbar-nav ml-auto" data-aos="fade-left" data-aos-delay="50" data-aos-duration="900" data-aos-easing="ease-in-out" data-aos-offset="50" data-aos-once="false"><li><a class="linky nav-link" href="../../../../">Home</a></li><li class="active"><a class="linky nav-link" href="../../../">Posts</a></li><li><a class="linky nav-link" href="../../../../projects/">Projects</a></li><li><a class="linky nav-link" href="../../../../contact/">Contact</a></li><li><a class="linky nav-link" href="../../../../about/">About</a></li></ul></div></div></nav><main class="page"><div class="container mt-5"><div class="tags ml-2 pl-1"><a class="p-0 m-1" href="../../../javascript/"><span class="badge">javascript</span></a> <a class="p-0 m-1" href="../../../nodejs/"><span class="badge">nodejs</span></a> <a class="p-0 m-1" href="../../../linux/"><span class="badge">linux</span></a> <a class="p-0 m-1" href="../../../ubuntu/"><span class="badge">ubuntu</span></a></div><div class="container mt-1"><div class="blog-post"><h4>How To Install Node.js on Ubuntu 20.04 LTS</h4><h5>Introduction</h5><p><a href="https://nodejs.org/en/"><strong>Node.js</strong></a> is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser. It lets developers use JavaScript to write command line tools and for server-side scripting to produce dynamic web page content before the page is sent to the user's web browser. Consequently, Node.js represents a "JavaScript everywhere" paradigm, unifying web-application development around a single programming language, rather than different languages for server-side and client-side scripts.</p><p>In this post, we will use three different ways to get Node.js installed on an Ubuntu 20.04 machine :</p><ul><li>installing <code>nvm</code>, the Node Version Manager, and using it to install and manage multiple versions of <code>node.js</code>.</li><li>using the NodeSource PPA to install <code>nodejs</code> .</li><li>using snap to install nodejs on ubuntu 20.04 .</li><li>using <code>apt</code> to install the <code>nodejs</code> from Ubuntu’s default software repository.</li></ul><h5>1 - Installing Node Using the Node Version Manager [RECOMMENDED]</h5><p>The best way ( in my opinion) of installing <code>node.js</code> is to use <code>nvm</code> : the Node Version Manager.</p><p>As it's particularly flexible, this tool allows you to install and maintain many different independent versions of Node.js, and their associated Node packages, at the same time.</p><p>To install NVM on your Ubuntu 20.04 machine, visit <a href="https://github.com/nvm-sh/nvm">the project’s GitHub repo</a>.</p><p>Copy the command from the README file. This will get you the most recent version of the installation script. (version 0.38.0 the time of writting this article )</p><p>make sure you have curl installed :</p><pre><code class="language-bash"> 
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="description"
+  content="Walid Lamraoui (dzc0d3r) Blog .. This blog is about : programming, web developement, Frontend, Backend, DevOps, Penetration testing, Gnu/Linux and more" />
+
+<!-- viewport -->
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+<link rel="shortcut icon"
+  href="../../../../images/minified/logo.ico?h=aada122e"
+  type="image/x-icon">
+
+<!-- Begin css file -->
+<!-- bootstrap 4 -->
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+  integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer" />
+<!-- font-awesome -->
+<link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- prism css-->
+<link rel="stylesheet"
+  href="../../../../static/css/prism.min.css?h=95707fd2">
+
+<!-- AOS CSS -->
+<link rel="stylesheet"
+  href="https://unpkg.com/aos@next/dist/aos.css" />
+
+<!-- Custom css -->
+<link rel="stylesheet"
+  href="../../../../static/css/style.min.css?h=e2f77a7c">
+
+
+<!-- Google tag (gtag.js) -->
+<script async
+  src="https://www.googletagmanager.com/gtag/js?id=G-ST87D0RGPJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-ST87D0RGPJ');
+</script>
+
+
+
+
+<!-- end css files -->
+<title>How To Install Node.js on Ubuntu 20.04 LTS</title>
+
+<body data-prismjs-copy-timeout="800">
+  <!-- Begin NavBar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-4">
+    <div class="container">
+
+      <a data-aos="fade-right"
+        data-aos-offset="50"
+        data-aos-delay="50"
+        data-aos-duration="900"
+        data-aos-easing="ease-in-out"
+        data-aos-once="false"
+        class="navbar-brand "
+        href="../../../../">
+        <span>
+          < </span>
+            DzC0d3R
+            <span>
+              /> </span>
+      </a>
+      <button class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarColor02"
+        aria-controls="navbarColor02"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse"
+        id="navbarColor02">
+        <ul data-aos="fade-left"
+          data-aos-offset="50"
+          data-aos-delay="50"
+          data-aos-duration="900"
+          data-aos-easing="ease-in-out"
+          data-aos-once="false"
+          class="navbar-nav ml-auto">
+          <li><a class="linky nav-link"
+              href="../../../../">Home</a></li>
+            
+            <li
+              class="active"
+              ><a class="linky nav-link"
+                href="../../../">Posts</a></li>
+              
+            <li><a class="linky nav-link"
+                href="../../../../projects/">Projects</a></li>
+              
+            <li><a class="linky nav-link"
+                href="../../../../contact/">Contact</a></li>
+              
+            <li><a class="linky nav-link"
+                href="../../../../about/">About</a></li>
+              
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End NavBar-->
+
+
+  <main class="page">
+    
+<div class="container mt-5">
+
+
+  
+  <div class="tags ml-2 pl-1">
+    <a class="p-0 m-1"
+      href="../../../javascript/">
+      <span class="
+          badge ">
+        javascript
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../nodejs/">
+      <span class="
+          badge ">
+        nodejs
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../linux/">
+      <span class="
+          badge ">
+        linux
+      </span>
+    </a>
+
+
+    <a class="p-0 m-1"
+      href="../../../ubuntu/">
+      <span class="
+          badge ">
+        ubuntu
+      </span>
+    </a>
+
+
+    
+  </div>
+  
+
+  <div class="container mt-1">
+    
+<div class="blog-post">
+  
+  <h4>How To Install Node.js on Ubuntu 20.04 LTS</h4>
+  
+
+  <h5>Introduction</h5>
+<p><a href="https://nodejs.org/en/"><strong>Node.js</strong></a>  is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser. 
+It lets developers use JavaScript to write command line tools and for server-side scripting to produce dynamic web page content before the page is sent to the user's web browser. 
+Consequently, Node.js represents a "JavaScript everywhere" paradigm, unifying web-application development around a single programming language, rather than different languages for server-side and client-side scripts.</p>
+<p>In this post, we will use three different ways to get Node.js installed on an Ubuntu 20.04 machine :</p>
+<ul>
+<li>installing <code>nvm</code>, the Node Version Manager, and using it to install and manage multiple versions of <code>node.js</code>.</li>
+<li>using the NodeSource PPA to install <code>nodejs</code> .</li>
+<li>using snap to install nodejs on ubuntu 20.04 .</li>
+<li>using <code>apt</code> to install the <code>nodejs</code>  from Ubuntu’s default software repository.</li>
+</ul>
+<h5>1 - Installing Node Using the Node Version Manager [RECOMMENDED]</h5>
+<p>The best way ( in my opinion) of installing <code>node.js</code> is to use <code>nvm</code> : the Node Version Manager.</p>
+<p>As it's particularly flexible, this tool allows you to install and maintain many different independent versions of Node.js, and their associated Node packages, at the same time.</p>
+<p>To install NVM on your Ubuntu 20.04 machine, visit <a href="https://github.com/nvm-sh/nvm">the project’s GitHub repo</a>.</p>
+<p>Copy the command from the README file. This will get you the most recent version of the installation script.
+(version 0.38.0 the time of writting this article )</p>
+<p>make sure you have curl installed :</p>
+<pre><code class="language-bash" > 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-</code></pre><p>or if you preffer wget :</p><pre><code class="language-bash"> 
+</code></pre><p>or if you preffer wget :</p>
+<pre><code class="language-bash"> 
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-</code></pre><p>Running either of the above commands downloads a script and runs it. The script clones the nvm repository to <code>~/.nvm</code>, and attempts to add the source lines from the snippet below to the correct profile file (<code>~/.bash_profile</code>, <code>~/.zshrc</code>, <code>~/.profile</code>, or <code>~/.bashrc</code>).</p><pre><code class="language-bash">
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] &amp;&amp; printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; \. "$NVM_DIR/nvm.sh" # This loads nvm
-</code></pre><p>Now, you can ask NVM which versions of Node are available:</p><pre><code class="language-bash">
+</code></pre><p>Running either of the above commands downloads a script and runs it. The script clones the nvm repository to <code>~/.nvm</code>, and attempts to add the source lines from the snippet below to the correct profile file (<code>~/.bash_profile</code>, <code>~/.zshrc</code>, <code>~/.profile</code>, or <code>~/.bashrc</code>).</p>
+<pre><code class="language-bash">
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+</code></pre><p>Now, you can ask NVM which versions of Node are available:</p>
+<pre><code class="language-bash">
 nvm list-remote
-</code></pre>the output should be something like :<pre><code class="language-bash">
+</code></pre>
+the output should be something like : 
+<pre><code class="language-bash">
 ...
        v14.14.0
        v14.15.0   (LTS: Fermium)
@@ -27,37 +220,87 @@ nvm list-remote
         v16.3.0
         v16.4.0
         v16.4.1
-</code></pre><p>It’s a very long list! You can install a version of Node by typing any of the release versions you see. For instance, to get version v16.3.0, you can type:</p><pre><code class="language-bash">
+</code></pre><p>It’s a very long list! You can install a version of Node by typing any of the release versions you see. For instance, to get version v16.3.0, you can type:</p>
+<pre><code class="language-bash">
 nvm install v16.3.0
-</code></pre><p>You can see the different versions you have installed by typing:</p><pre><code class="language-bash">
+</code></pre><p>You can see the different versions you have installed by typing:</p>
+<pre><code class="language-bash">
 nvm list
-</code></pre><p>This shows the currently active version on the first line (-&gt; v16.3.0), followed by some named aliases and the versions that those aliases point to.</p><p><strong>Note:</strong> if you also have a version of Node.js installed through aptyou may see a system entry here. You can always activate the system-installed version of Node using <code>nvm use system</code> .</p><p>Additionally, you’ll see aliases for the various long-term support (or LTS) releases of Node:</p><p>We can install a release based on these aliases as well. For instance, to install the latest long-term support version, <code>fermium</code>, run the following:</p><pre><code class="language-bash">
+</code></pre><p>This shows the currently active version on the first line (-&gt;   v16.3.0), followed by some named aliases and the versions that those aliases point to.</p>
+<p><strong>Note:</strong> if you also have a version of Node.js installed through aptyou may see a system entry here. You can always activate the system-installed version of Node using <code>nvm use system</code> .</p>
+<p>Additionally, you’ll see aliases for the various long-term support (or LTS) releases of Node:</p>
+<p>We can install a release based on these aliases as well. For instance, to install the latest long-term support version, <code>fermium</code>, run the following:</p>
+<pre><code class="language-bash">
 nvm install lts/fermium
-</code></pre><p>You can switch between installed versions with nvm use:</p><pre><code class="language-bash">
+</code></pre><p>You can switch between installed versions with nvm use:</p>
+<pre><code class="language-bash">
 nvm use lts/fermium
-</code></pre>output :<pre><code class="language-bash">
+</code></pre>
+output :
+<pre><code class="language-bash">
 Now using node v14.17.2 (npm v6.14.13)
-</code></pre><p>You can verify that the install was successful using the same technique from the other sections, by typing:</p><pre><code class="language-bash">
+</code></pre><p>You can verify that the install was successful using the same technique from the other sections, by typing:</p>
+<pre><code class="language-bash">
 node --version
-</code></pre><h5>2 - Installing Node.js with Apt Using a NodeSource PPA</h5><p>To install Node.js, you can also use a PPA (personal package archive) maintained by NodeSource. These PPAs have more versions of Node.js available than the official Ubuntu repositories. v10, v12, v13, v14, and v16 are available as of the time of writing.</p><p>You can visit the <a href="https://github.com/nodesource/distributions">Github repo</a> for more information.</p><p>First, you need to add the PPA in order to get access to its packages. From your home directory, use curl to retrieve the installation script for your preferred version, making sure to replace 14.x with your preferred version string (if different). and then install nodejs</p><pre><code class="language-bash">
+</code></pre><h5>2 - Installing Node.js with Apt Using a NodeSource PPA</h5>
+<p>To install Node.js, you can also use a PPA (personal package archive) maintained by NodeSource. These PPAs have more versions of Node.js available than the official Ubuntu repositories. v10, v12, v13, v14, and v16 are available as of the time of writing.</p>
+<p>You can visit the <a href="https://github.com/nodesource/distributions">Github repo</a> for more information.</p>
+<p>First, you need to add the PPA in order to get access to its packages. From your home directory, use curl to retrieve the installation script for your preferred version, making sure to replace 14.x with your preferred version string (if different). and then install nodejs</p>
+<pre><code class="language-bash">
 curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
-</code></pre><p>Verify that you’ve installed the new version by running:</p><pre><code class="language-bash">
+</code></pre><p>Verify that you’ve installed the new version by running:</p>
+<pre><code class="language-bash">
 node --version
 </code></pre><pre><code class="language-bash">
 Output
 v14.17.2
-</code></pre><p>The NodeSource nodejs package contains both the <code>node</code> binary and <code>npm</code>, so you don’t need to install <code>npm</code> separately.</p><h5>3 Using snaps to install nodejs [GOOD IF YOU LIKE SNAP]</h5><p><a href="https://docs.snapcraft.io/snaps/">Snaps</a> are containerized software packages designed to work across cloud, desktop, and IoT devices. They work natively on most popular Linux distributions, feature automatic updates for users, improved security, and greater flexibility for developers working in Linux environments. Their auto-updating and transactional nature is making snaps a popular choice for the delivery of desktop applications in particular.</p><p>The Node.js snap contains the Node.js runtime, along the two most widely-used package managers, <code>npm</code> and <code>yarn</code>. So with a single command, developers can be up and running with their chosen version(s) of Node.js and supporting tools with no need for external repos or personal package archives (PPAs).</p><p>Simply run :</p><pre><code class="language-bash">
+</code></pre><p>The NodeSource nodejs package contains both the <code>node</code> binary and <code>npm</code>, so you don’t need to install <code>npm</code> separately.</p>
+<h5>3 Using snaps to install nodejs [GOOD IF YOU LIKE SNAP]</h5>
+<p><a href="https://docs.snapcraft.io/snaps/">Snaps</a> are containerized software packages designed to work across cloud, desktop, and IoT devices. They work natively on most popular Linux distributions, feature automatic updates for users, improved security, and greater flexibility for developers working in Linux environments. Their auto-updating and transactional nature is making snaps a popular choice for the delivery of desktop applications in particular.</p>
+<p>The Node.js snap contains the Node.js runtime, along the two most widely-used package managers, <code>npm</code> and <code>yarn</code>. So with a single command, developers can be up and running with their chosen version(s) of Node.js and supporting tools with no need for external repos or personal package archives (PPAs).</p>
+<p>Simply run :</p>
+<pre><code class="language-bash">
 sudo snap install node --classic
-</code></pre><p>This will install the current LTS Alongside with npm and yarn.</p><p>For more information on how to install different versions visit <a href="https://snapcraft.io/node">node snap package homepage</a></p><h5>4 - Installing Node.js with apt from the Default Repositories [ NOT RECOMMENDED]</h5><p>Ubuntu 20.04 contains a version of Node.js in its default repositories that can be used to provide a consistent experience across multiple systems. but keep in mind it is not the latest LTS version, but it should be stable and sufficient for quick experimentation with the language.</p><p>To install nodejs , you can use the apt package manager. refresh your local package index first by typing:</p><pre><code class="language-bash">
+</code></pre><p>This will install the current LTS Alongside with npm and yarn.</p>
+<p>For more information on how to install different versions visit <a href="https://snapcraft.io/node">node snap package homepage</a></p>
+<h5>4 - Installing Node.js with apt from the Default Repositories [ NOT RECOMMENDED]</h5>
+<p>Ubuntu 20.04 contains a version of Node.js in its default repositories that can be used to provide a consistent experience across multiple systems. but keep in mind it is not  the latest LTS version, but it should be stable and sufficient for quick experimentation with the language.</p>
+<p>To install nodejs , you can use the apt package manager. refresh your local package index first by typing:</p>
+<pre><code class="language-bash">
 sudo apt update 
-</code></pre><p>Then simply run :</p><pre><code class="language-bash">
+</code></pre><p>Then simply run :</p>
+<pre><code class="language-bash">
 sudo apt install nodejs 
-</code></pre><p>Check that the install was successful by querying node for its version number:</p><pre><code class="language-bash">
+</code></pre><p>Check that the install was successful by querying node for its version number:</p>
+<pre><code class="language-bash">
 node --version
-</code></pre><p>you’ll also want to also install <code>npm</code>, the Node.js package manager.</p><p>You can do this by installing the npm package with apt:</p><pre><code class="language-bash">
+</code></pre><p>you’ll also want to also install <code>npm</code>, the Node.js package manager.</p>
+<p>You can do this by installing the npm package with apt:</p>
+<pre><code class="language-bash">
 sudo apt install npm
-</code></pre><p>This will allow you to install modules and packages to use with Node.js.</p><p>And that's it, thanks for reading.</p><p class="meta">Written By: <a href="https://twitter.com/dzc0d3r">Walid Lamraoui</a>on 2021-07-02</p></div></div><div class="container mt-3 mb-5"><div class="comments"><div id="disqus_thread"></div><script>
+</code></pre><p>This will allow you to install modules and packages to use with Node.js.</p>
+<p>And that's it, thanks for reading.</p>
+
+  <p class="meta">
+    Written By:
+    
+    <a href="https://twitter.com/dzc0d3r">Walid Lamraoui</a>on
+    2021-07-02
+    
+  </p>
+</div>
+
+  </div>
+
+
+  <div class="
+      container
+      mt-3
+      mb-5">
+    <div class="comments">
+<div id="disqus_thread"></div>
+<script>
   var disqus_config = function() { this.page.identifier = "/posts/how-to-install-nodejs-on-ubuntu-2004-lts"; this.page.url = "https://dzc0d3r.github.io/codeblog/posts/2021/7/how-to-install-nodejs-on-ubuntu-2004-lts/"; };
   (function() {
     var d = document, s = d.createElement('script');
@@ -65,4 +308,121 @@ sudo apt install npm
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
   })();
-</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div></div></div></main><div class="custom-shape-divider-bottom-1623373495"><svg data-name="Layer 1" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path class="shape-fill" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path></svg></div><div class="container-fluid custom-fluid pb-0 mb-0 justify-content-center text-light"><footer><div class="container"><div class="row py-5"><div class="col-12"><div class="row"><div class="col-xl-8 col-md-6 col-sm-4 col-12 mx-auto d-none d-md-block"><h3 class="text-muted mb-md-0 bold-text">DzC0d3R</h3></div><div class="col-xl-4 col-md-6 col-sm-8 col-12 px-2"><a class="mx-2" href="https://github.com/dzc0d3r" target="_blank"><i aria-hidden="true" class="fa fa-github"></i></a> <a class="mx-2" href="https://www.linkedin.com/in/walid-lamraoui/" target="_blank"><i aria-hidden="true" class="fa fa-linkedin"></i></a> <a class="mx-2" href="https://stackoverflow.com/users/8990846/walid-lamraoui" target="_blank"><i aria-hidden="true" class="fa fa-stack-overflow"></i></a> <a class="mx-2" href="https://twitter.com/dzc0d3r" target="_blank"><i aria-hidden="true" class="fa fa-twitter"></i></a> <a class="mx-2" href="https://codepen.io/walid-lamraoui" target="_blank"><i aria-hidden="true" class="fa fa-codepen"></i></a> <a class="mx-2" href="	https://medium.com/@walid.lamraoui" target="_blank"><i aria-hidden="true" class="fa fa-medium"></i></a></div></div></div><div class="col-12"><div class="row ml-1 mt-3"><p class="rights">Copyright ©<script>document.write(new Date().getFullYear())</script>,  All Rights Reserved</p></div></div></div></div></footer></div><script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script><script crossorigin="anonymous" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script><script src="../../../../static/js/prism.min.js?h=9b543dfb"></script><script src="https://unpkg.com/aos@next/dist/aos.js"></script><script src="../../../../static/js/app.min.js?h=ee69aafa"></script></body></html>
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+  </div>
+
+
+</div>
+
+
+  </main>
+
+
+
+
+  <div class="custom-shape-divider-bottom-1623373495">
+    <svg data-name="Layer 1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none">
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <!-- Begin Footer-->
+
+  <div class="container-fluid custom-fluid pb-0 mb-0 justify-content-center text-light ">
+    <!-- Custom divider -->
+    <footer>
+      <div class="container">
+        <div class="row py-5">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-xl-8 col-md-6 col-sm-4 col-12 mx-auto d-none d-md-block">
+                <h3 class="text-muted mb-md-0 bold-text">DzC0d3R</h3>
+
+              </div>
+
+              <div class="col-xl-4 col-md-6 col-sm-8 col-12 px-2">
+                <a href="https://github.com/dzc0d3r"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-github"
+                    aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/walid-lamraoui/"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-linkedin"
+                    aria-hidden="true"></i></a>
+                <a href="https://stackoverflow.com/users/8990846/walid-lamraoui"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-stack-overflow"
+                    aria-hidden="true"></i></a>
+                <a href="https://twitter.com/dzc0d3r"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-twitter"
+                    aria-hidden="true"></i></a>
+                <a href="https://codepen.io/walid-lamraoui"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-codepen"
+                    aria-hidden="true"></i></a>
+                <a href="	https://medium.com/@walid.lamraoui"
+                  class="mx-2"
+                  target="_blank"><i class="fa fa-medium"
+                    aria-hidden="true"></i></a>
+
+              </div>
+
+
+
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row ml-1 mt-3">
+              <p class="rights">
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear())</script>,&nbsp; All Rights Reserved
+              </p>
+              <!-- <a class="rights"
+                                href="http://uhs5lbrjzbbtcsmx.onion/"
+                                style="color: #fed049">
+                                Visit this website on the DARK WEB
+                              </a> -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </footer>
+  </div>
+  <!-- End  Footer-->
+
+  <!-- Begin javascript files -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"
+    integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+
+  <script src="../../../../static/js/prism.min.js?h=9b543dfb"></script>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+  <script src="../../../../static/js/app.min.js?h=ee69aafa"></script>
+
+
+
+  <!-- End javascript files -->
+</body>
+
+</html>
